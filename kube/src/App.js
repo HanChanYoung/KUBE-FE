@@ -7,6 +7,7 @@ import {
 
 import Index from "./page/index"
 import ReduxTestPage from './test/ReduxTestPage';
+import Login from './page/Login';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         {/* routing 예시 */}
       <Route path="/" element={<Index/>}/>
+      <Route path="/login" element={<Login/>}/>
       <Route path="rtp" element={<ReduxTestPage/>}/>
       </Routes>
     </Router>
