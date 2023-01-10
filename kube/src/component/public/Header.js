@@ -7,7 +7,7 @@ export default function Header(){
     var isLogin=false;
 
     const navigate=useNavigate();
-    
+    var isLogin=true;
     return(
         <div style={{paddingBottom:"100px"}}>
             <div style={{width:"100%",
