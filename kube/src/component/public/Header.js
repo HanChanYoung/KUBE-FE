@@ -5,7 +5,7 @@ import KakaoLogined from "./header/KakaoLogined";
 
 export default function Header(){
     const navigate=useNavigate();
-    var isLogin=false;
+    var isLogin=true;
     return(
         <div style={{paddingBottom:"100px"}}>
             <div style={{width:"100%",
