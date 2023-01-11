@@ -9,13 +9,14 @@ export default function Header(){
     const isLogin=useSelector((state)=>state.loginSlice.isLogin);
     const navigate=useNavigate();
     return(
-        <div style={{paddingBottom:"100px"}}>
+        <div style={{paddingBottom:"80px"}}>
             <div style={{width:"100%",
                         height:"80px",
                         position:"fixed",
                         display:"flex",
                         justifyContent:"center",
                         alignItems:"center",
+                        backgroundColor:"white",
                         }}>
                 <div style={{width:"95%",
                             height:"80px",

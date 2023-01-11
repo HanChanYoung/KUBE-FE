@@ -8,6 +8,7 @@ import {
 import Index from "./page/index"
 import ReduxTestPage from './test/ReduxTestPage';
 import Login from './page/Login';
+import BoardRsvdPage from './page/BoardRsvdPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/" element={<Index/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="rtp" element={<ReduxTestPage/>}/>
+      <Route path="brp" element={<BoardRsvdPage/>}/>
       </Routes>
     </Router>
   );
