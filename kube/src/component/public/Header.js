@@ -9,27 +9,27 @@ export default function Header(){
     return(
         <div style={{paddingBottom:"100px"}}>
             <div style={{width:"100%",
-                        height:"100px",
+                        height:"80px",
                         position:"fixed",
                         display:"flex",
                         justifyContent:"center",
                         alignItems:"center",
                         }}>
                 <div style={{width:"95%",
-                            height:"100px",
+                            height:"80px",
                             display:"flex",
                             justifyContent:"space-between",
                             alignItems:"center",
                             }}>
-                    <Button style={{color:"black",fontSize:"36px",
-                                    fontWeight:"1000",
+                    <Button style={{color:"black",fontSize:"32px",
+                                    fontWeight:"bold",
                                     fontStyle:"italic",}}
                                     onClick={()=>{navigate("/")}}>
                     KUBE
                     </Button>
                     <div style={{
-                            width:"300px",
-                            height:"100px",
+                            width:"250px",
+                            height:"80px",
                             display:"flex",
                             justifyContent:"space-between",
                             alignItems:"center",
