@@ -11,8 +11,6 @@ export const ExamSlice=createSlice(
             askGender:false,
             privateSurvey:'FALSE', 
             limitPerson:'',
-            startDate:new Date(),
-            endDate:new Date(),
             theme:null,
             questionNumber:0,
             questionList:[],
@@ -26,12 +24,6 @@ export const ExamSlice=createSlice(
             },
             SET_DESCRIPTION:(state,action)=>{
                 state.description=action.payload;
-            },
-            SET_STARTDATE:(state,action)=>{
-                state.startDate=action.payload;       
-            },
-            SET_ENDDATE:(state,action)=>{
-                state.endDate=action.payload;
             },
             SET_PUBLIC_PRIVATE:(state,action)=>{
                 state.privateSurvey=action.payload;

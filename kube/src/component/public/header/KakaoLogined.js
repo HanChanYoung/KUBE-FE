@@ -1,6 +1,7 @@
 import { Box, Avatar, Menu, MenuItem, ListItemIcon, IconButton, Tooltip } from "@mui/material"
 import { Create, Person, Settings, Logout } from "@mui/icons-material"
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function KakaoLogined(){
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -11,6 +12,7 @@ export default function KakaoLogined(){
     const handleClose = () => {
         setAnchorEl(null);
     };
+    const navigate=useNavigate();
     return(
         <React.Fragment>
             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -76,7 +78,7 @@ export default function KakaoLogined(){
                 My Page
                 </MenuItem>
 
-                <MenuItem>
+                <MenuItem onClick={()=>{navigate("/rtp")}}>
                 <ListItemIcon>
                     <Settings fontSize="small" />
                 </ListItemIcon>

@@ -1,4 +1,5 @@
 import {useSelector,useDispatch} from 'react-redux';
+import Header from '../component/public/Header';
 import { 
     SET_TITLE,
     // SET_DESCRIPTION,
@@ -17,9 +18,13 @@ export default function ReduxTestPage(){
     //store에 정의된 이름으로 불러와야 됩니다
     const sliceExam=useSelector((state)=>state.examSlice);
     const dispatch=useDispatch();
+    const test=useSelector((state)=>state.loginSlice);
+
+    console.log(test)
 
     return(
         <div>
+            <Header></Header>
             <button onClick={()=>{console.log(sliceExam)}}>버튼입니당</button>
             <button onClick={()=>{dispatch(SET_TITLE("dispatch test"))}}>dispatch test</button>
         </div>

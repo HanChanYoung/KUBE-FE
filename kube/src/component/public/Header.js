@@ -2,9 +2,11 @@ import {Button} from "@mui/material"
 import {useNavigate} from 'react-router-dom'
 import KaKaoLogin from "./header/KakaoLogin";
 import KakaoLogined from "./header/KakaoLogined";
+import {useSelector} from 'react-redux';
 
 export default function Header(){
-    var isLogin=true;
+
+    const isLogin=useSelector((state)=>state.loginSlice.isLogin);
     const navigate=useNavigate();
     return(
         <div style={{paddingBottom:"100px"}}>

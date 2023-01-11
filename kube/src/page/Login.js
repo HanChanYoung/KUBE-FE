@@ -1,12 +1,17 @@
 import {React,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import {useDispatch} from 'react-redux';
+import { SET_LOGIN } from '../state/slice/LoginSlice';
 
 export default function Login(){
+
     const {Kakao}=window;
     const uri=window.location.href
     const arr=uri.split("=");
     const navigate=useNavigate();
+    const dispatch=useDispatch();
+
     useEffect(async() =>{
         // console.log(uri);
         // console.log(arr[1]);
@@ -31,6 +36,7 @@ export default function Login(){
             })
                 .then(function(response) {
                     console.log(response);
+                    dispatch(SET_LOGIN());
                 })
                 .catch(function(error) {
                     console.log(error);
