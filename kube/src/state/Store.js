@@ -4,11 +4,13 @@ import storage from "redux-persist/lib/storage/session";
 //redux test
 import { ExamSlice } from './slice/SliceExam';
 import { LoginSlice } from './slice/LoginSlice';
+import { BoardRsvdSlice } from './slice/BoardRsvdSlice';
 
 export const rootReducer=combineReducers({
     //redux test
     examSlice:ExamSlice.reducer,
-    loginSlice:LoginSlice.reducer
+    loginSlice:LoginSlice.reducer,
+    boardRsvdSlice:BoardRsvdSlice.reducer,
     })
 
 const persistConfig = {
