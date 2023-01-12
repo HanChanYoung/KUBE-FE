@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 // import axios from "axios";
 import CardsDisplay from "./CardsDisplay";
 import { Pagination } from "@mui/material";
+import usePagination from "./Pagination";
 
 export default function ProductsList() {
     const products = [
@@ -68,9 +69,9 @@ export default function ProductsList() {
     const [currentPage, setCurrentPage] = useState(1);
     const [cardsPerPage] = useState(10);
 
-    // const PER_PAGE = 4;
-    // const count = Math.ceil(products.length / PER_PAGE);
-    // const _DATA = usePagination(products, PER_PAGE);
+    const PER_PAGE = 4;
+    const count = Math.ceil(products.length / PER_PAGE);
+    const _DATA = usePagination(products, PER_PAGE);
 
     
     useEffect(()=> {
@@ -94,22 +95,30 @@ export default function ProductsList() {
     // const currentCards = productCard.slice(indexOfFirstCard, indexOfLastCard);
 
     // Change page
-    // const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     const handleChange = (event, value) => {
         setCurrentPage(value);
+        _DATA.jump(value);
     };
 
     return (
         <div>
             <div style={{fontFamily:"sans-serif", textAlign:"center"}}>
                 <CardsDisplay productCard={productCard} loading={loading} />
-                <Pagination style={{
-                    margin:"40px",
-                    justifyContent:"center",
-                    display:"flex",
-                    }}
-                    count={5} page={currentPage} onChange={handleChange} size="large"/>
+                <Pagination 
+                    style={{
+                        margin:"40px",
+                        justifyContent:"center",
+                        display:"flex",
+                        }}
+                    count={count}
+                    page={currentPage}
+                    onChange={handleChange}
+                    size="large"
+                    variant="outlined"
+                    shape="rounded"
+                    />
             </div>
         </div>
     )
