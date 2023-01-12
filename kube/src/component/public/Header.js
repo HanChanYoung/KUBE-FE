@@ -9,7 +9,7 @@ export default function Header(){
     const isLogin=useSelector((state)=>state.loginSlice.isLogin);
     const navigate=useNavigate();
     return(
-        <div style={{paddingBottom:"80px"}}>
+        <div style={{paddingBottom:"80px",overflow:"hidden"}}>
             <div style={{width:"100%",
                         height:"80px",
                         position:"fixed",
@@ -17,6 +17,7 @@ export default function Header(){
                         justifyContent:"center",
                         alignItems:"center",
                         backgroundColor:"white",
+                        borderBottom:"1px solid #BBBBBB"
                         }}>
                 <div style={{width:"95%",
                             height:"80px",
