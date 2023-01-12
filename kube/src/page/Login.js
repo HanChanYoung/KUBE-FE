@@ -31,7 +31,7 @@ export default function Login(){
             Kakao.API.request({
                 url: '/v2/user/me',
                 data: {
-                    property_keys: ['kakao_account.email'],
+                    
                 },
             })
                 .then(function(response) {

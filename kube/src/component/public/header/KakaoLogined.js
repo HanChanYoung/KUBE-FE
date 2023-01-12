@@ -2,6 +2,8 @@ import { Box, Avatar, Menu, MenuItem, ListItemIcon, IconButton, Tooltip } from "
 import { Create, Person, Settings, Logout } from "@mui/icons-material"
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+import { SET_LOGOUT } from "../../../state/slice/LoginSlice";
 
 export default function KakaoLogined(){
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -13,6 +15,8 @@ export default function KakaoLogined(){
         setAnchorEl(null);
     };
     const navigate=useNavigate();
+    const {Kakao}=window;
+    const dispatch=useDispatch();
     return(
         <React.Fragment>
             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -78,13 +82,25 @@ export default function KakaoLogined(){
                 My Page
                 </MenuItem>
 
-                <MenuItem onClick={()=>{navigate("/rtp")}}>
+                <MenuItem>
                 <ListItemIcon>
                     <Settings fontSize="small" />
                 </ListItemIcon>
                 Settings
                 </MenuItem>
-                <MenuItem>
+                
+                <MenuItem onClick={()=>{
+                    Kakao.API.request({
+                    url: '/v1/user/unlink',
+                    })
+                    .then(function(response) {
+                        console.log(response);
+                        dispatch(SET_LOGOUT());
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+                }}>
                 <ListItemIcon>
                     <Logout fontSize="small" />
                 </ListItemIcon>

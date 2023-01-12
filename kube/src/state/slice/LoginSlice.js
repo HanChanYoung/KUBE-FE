@@ -10,9 +10,9 @@ export const LoginSlice=createSlice(
             SET_LOGIN:(state,action)=>{
                 state.isLogin=true;
             },
-            // SET_LOGOUT:(state,action)=>{
-            //     state.isLogin=false;
-            // }
+            SET_LOGOUT:(state,action)=>{
+                state.isLogin=false;
+            }
         }
     }
 );
@@ -20,6 +20,6 @@ export const LoginSlice=createSlice(
 
 export const {
     SET_LOGIN,
-    // SET_LOGOUT,
+    SET_LOGOUT,
 } = LoginSlice.actions;
 
