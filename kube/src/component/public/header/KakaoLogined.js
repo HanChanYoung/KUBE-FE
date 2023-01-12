@@ -68,7 +68,8 @@ export default function KakaoLogined(){
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem>
+                <MenuItem
+                onClick={()=>{navigate("/bcp")}}>
                     <ListItemIcon>
                     <Create fontSize="small" />
                     </ListItemIcon>
