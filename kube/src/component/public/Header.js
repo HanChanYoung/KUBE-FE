@@ -3,7 +3,6 @@ import {useNavigate} from 'react-router-dom'
 import KaKaoLogin from "./header/KakaoLogin";
 import KakaoLogined from "./header/KakaoLogined";
 import {useSelector} from 'react-redux';
-import zIndex from "@mui/material/styles/zIndex";
 
 export default function Header(){
 

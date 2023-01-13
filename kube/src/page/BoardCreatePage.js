@@ -1,30 +1,74 @@
 import Header from "../component/public/Header";
-import {useEffect ,useState} from "react";
+import {useEffect ,useState,useRef} from "react";
 import {useSelector ,useDispatch} from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { Typography ,Select,TextField,MenuItem,FormControl,FormHelperText,Button} from "@mui/material";
+import { Typography ,Select,TextField,MenuItem,FormControl,FormHelperText,Button,Menu} from "@mui/material";
 import {useDaumPostcodePopup} from 'react-daum-postcode';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../component/boardrsvdpage/calendar.css'
+import imageCompression from 'browser-image-compression';
+
+function leftPad(value) {
+    if (value >= 10) {
+        return value;
+    }
+
+    return `0${value}`;
+}
+
+function toStringByFormatting(source, delimiter = '-') {
+    const year = source.getFullYear();
+    const month = leftPad(source.getMonth() + 1);
+    const day = leftPad(source.getDate());
+
+    return [year, month, day].join(delimiter);
+}
 
 export default function BoardCreatePage(){
     const isLogin=useSelector((state)=>state.loginSlice.isLogin);
     const navigate=useNavigate();
+    //보관
+    const [take, setTake] = useState('직접');
+    //수령
+    const [give, setGive] = useState('직접');
+    
+    const [isCheck, setIsCheck] = useState(true);
 
-    const [take, setTake] = useState('');
-    const [give, setGive] = useState('');
+    const [title,setTitle]=useState('');
+
+    const [desc,setDesc]=useState('');
+
+    const [price,setPrice]=useState('');
+
+    const [category, setCategory] = useState('카테고리를 선택해주세요.')
+
+    const [rendStartDate, setRendStartDate] = useState('')
+
+    const [rendEndDate, setRendEndDate] = useState('')
 
     const handleChange = (event) => {
+        if(event.target.value=='직접'&&give=='직접'){
+            setIsCheck(true);
+        }else{
+            setIsCheck(false)
+        }
         setTake(event.target.value);
     };
     const handleChange2 = (event) => {
+        if(event.target.value=='직접'&&take=='직접'){
+            setIsCheck(true);
+        }else{
+            setIsCheck(false)
+        }
         setGive(event.target.value);
+
     };
 
+
     //주소 API
-    const [addr, setAddr] = useState('');
     const [zonecode, setZonecode] = useState('');
+    const [addr, setAddr] = useState('');
     const [extraAddr, setExtraAddr] = useState('');
     
     const onCompletePost = data => {
@@ -35,15 +79,52 @@ export default function BoardCreatePage(){
     const handleClick = () => {
         open({ onComplete: onCompletePost });
     };
-    const isCheck=false
 
     useEffect(() =>{
         if(!isLogin){
             navigate("/");
     }}
     )
+    //For menu
+    const [anchorEl, setAnchorEl] = useState(null);
+    const openMenu = Boolean(anchorEl);
+    const handleClickMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+    //For Image
+    const fileInput = useRef(null);
+
+    const handleButtonClick = e => {
+        fileInput.current.click();
+    };
+    const options = { 
+        maxSizeMB: 2, 
+        maxWidthOrHeight: 650
+    }
+    const handleChangeImage =async e => {
+        console.log(e.target.files[0]);
+            const compressedFile = await imageCompression(e.target.files[0], options);
+            encodeFileToBase64(compressedFile);
+        }
+
+    const [imageSrc, setImageSrc] = useState('');
+
+    const encodeFileToBase64 = (fileBlob) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(fileBlob);
+        return new Promise((resolve) => {
+                reader.onload = () => {
+                    setImageSrc(reader.result);
+                    resolve();
+                };
+            });
+    };
     return(
         <div>
+
             <Header/>
             <div style={{height:"850px",width:"100%",
             display:"flex",
@@ -55,10 +136,26 @@ export default function BoardCreatePage(){
                     borderRight:"1px solid #BBBBBB",
                     marginTop:"135px",
                     }}>
-                        <div style={{width:"650px",
+                        <div
+                        onClick={handleButtonClick}
+                        style={{width:"650px",
                         height:"650px",
-                        backgroundColor:"black",
-                        borderRadius:"20px"}}></div>
+                        backgroundColor:"#E7E7E7",
+                        borderRadius:"20px",
+                        alignItems:"center",
+                        justifyContent:"center",
+                        display:"flex",
+                        fontSize:"24px"}}>
+                            {imageSrc ? <img 
+                            style={{maxwidth:"650px",maxheight:"650px"}}
+                            src={imageSrc} alt="preview-img" />
+                            :
+                            "사진을 등록해주세요!"}
+                        </div>
+                        <input type="file"
+                            ref={fileInput}
+                            onChange={handleChangeImage}
+                            style={{ display: "none" }} />
                     </div>
                 </div>
                 <div style={{width:"50%",height:"850px",}}>
@@ -69,35 +166,132 @@ export default function BoardCreatePage(){
                         <div style={{width:"600px",
                         height:"140px",
                         float:"right",
-                        borderBottom:"1px solid #BBBBBB"}}>
-                            <Typography style={{
-                                fontSize:"20px",
+                        borderBottom:"1px solid #BBBBBB",
+                        flexDirection:"column"}}>
+                            <div style={{width:"600px"}}>
+                            <Button
+                            onClick={handleClickMenu}
+                            style={{color:"black",
+                            height:"20px"}}>
+                                <Typography style={{
+                                    fontSize:"20px",
+                                    fontWeight:"bold",
+                                    textDecorationLine:"underline",
+                                }}>
+                                    {category}</Typography>
+                            </Button>
+                            </div>
+                            <Menu
+                                anchorEl={anchorEl}
+                                id="account-menu"
+                                open={openMenu}
+                                onClose={handleClose}
+                                onClick={handleClose}
+                                PaperProps={{
+                                elevation: 0,
+                                sx: {
+                                    overflow: 'visible',
+                                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                    mt: 1.5,
+                                    '& .MuiAvatar-root': {
+                                    width: 32,
+                                    height: 32,
+                                    ml: -0.5,
+                                    mr: 1,
+                                    },
+                                    '&:before': {
+                                    content: '""',
+                                    display: 'block',
+                                    position: 'absolute',
+                                    top: 0,
+                                    right: 14,
+                                    width: 10,
+                                    height: 10,
+                                    bgcolor: 'background.paper',
+                                    transform: 'translateY(-50%) rotate(45deg)',
+                                    zIndex: 0,
+                                    },
+                                },
+                                }}
+                                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                            >
+                                <MenuItem onClick={()=>setCategory("PACKAGE")}>
+                                    PACKAGE
+                                </MenuItem>
+                                <MenuItem onClick={()=>setCategory("TENT / TARP")}>
+                                    TENT / TARP
+                                </MenuItem>
+                                <MenuItem onClick={()=>setCategory("Bedding / Seasonal items")}>
+                                    Bedding / Seasonal items
+                                </MenuItem>
+                                <MenuItem onClick={()=>setCategory("Chair / Table Furniture")}>
+                                    Chair / Table Furniture
+                                </MenuItem>
+                                <MenuItem onClick={()=>setCategory("Brazier / Burner Others")}>
+                                    Brazier / Burner Others
+                                </MenuItem>
+                                <MenuItem onClick={()=>setCategory("Coppel / Ice box Tableware")}>
+                                    Coppel / Ice box Tableware
+                                </MenuItem>
+                                
+                            </Menu>
+                            <TextField 
+                            placeholder="제공할 상품의 제목을 입력해주세요"
+                            variant="standard"
+                            onChange={(e)=>setTitle(e.target.value)}
+                            value={title}
+                            InputProps={{
+                                disableUnderline:true,
+                                style:{marginTop:"8px",
+                                width:"450px",
+                                color:"black",}
+                            }}></TextField>
+
+                            <TextField 
+                            placeholder="가격 입력"
+                            variant="standard"
+                            onChange={(e)=>setPrice(e.target.value)}
+                            value={price}
+                            InputProps={{
+                                disableUnderline:true,
+                                style:{
+                                width:"150px",
+                                color:"black",
+                                float:"right",
+                                fontSize:"28px",
                                 fontWeight:"bold",
-                                textDecorationLine:"underline"
-                            }}>
-                                여기 카테고리 버튼</Typography>
+                                marginTop:"50px",}
+                            }}></TextField>
 
-                            <Typography stlye={{
-                                fontSize:"20px"
-                            }}>
-                                여기 제목</Typography>
-
-                            <Typography style={{
+                            {/* <Typography style={{
                                 float:"right",
                                 fontSize:"28px",
                                 fontWeight:"bold",
                                 marginTop:"20px"
                             }}>
-                                여기 돈 입력 받음</Typography>
+                                가격 입력</Typography> */}
                         </div>
                         <div style={{width:"600px",
                         height:"390px",
                         float:"right",
                         display:"flex",
-                        alignItems:"center",}}>
-                            <div>
-                            여기 내용 입력 받음
-                            </div>
+                        alignItems:"center"}}>
+                            <TextField
+                            variant="standard"
+                            multiline="true"
+                            placeholder="제공할 제품의 상세 내용을 입력해 주세요
+                            
+                            (예시)
+                            정가는 56,000원입니다.
+                            상태 좋습니다~"
+                            onChange={(e)=>setDesc(e.target.value)}
+                            value={desc}
+                            InputProps={{
+                                disableUnderline:true,
+                                style:{height:"390px",
+                                        width:"600px"}}}>
+                            </TextField>
                             
                         </div>
                     </div>
@@ -128,8 +322,8 @@ export default function BoardCreatePage(){
                                     value={take}
                                     onChange={(e)=>{handleChange(e)}}
                                     >
-                                        <MenuItem value={'직접 수령'}>직접 보관</MenuItem>
-                                        <MenuItem value={'픽업 서비스'}>픽업 서비스</MenuItem>
+                                        <MenuItem value={'직접'}>직접 보관</MenuItem>
+                                        <MenuItem value={'픽업'}>픽업 서비스</MenuItem>
                                     </Select>
                                     <FormHelperText>보관 방법을 선택하세요</FormHelperText>
                                 </FormControl>
@@ -145,8 +339,8 @@ export default function BoardCreatePage(){
                                     value={give}
                                     onChange={handleChange2}
                                     >
-                                        <MenuItem value={'직접 반납'}>직접 수령</MenuItem>
-                                        <MenuItem value={'픽업 서비스'}>픽업 서비스</MenuItem>
+                                        <MenuItem value={'직접'}>직접 수령</MenuItem>
+                                        <MenuItem value={'픽업'}>픽업 서비스</MenuItem>
                                     </Select>
                                     <FormHelperText>수령 방법을 선택하세요</FormHelperText>
                                 </FormControl>
@@ -222,7 +416,8 @@ export default function BoardCreatePage(){
                         <Calendar
                         className="re-calendar"
                         selectRange="true"
-                        onChange={(value,event)=>{console.log(value,event)}}
+                        minDate={new Date()}
+                        onChange={(value)=>{setRendStartDate(toStringByFormatting(value[0]));setRendEndDate(toStringByFormatting(value[1]));}}
                         view="month"
                         showNavigation="false"
                         />
@@ -234,7 +429,22 @@ export default function BoardCreatePage(){
                         border:"1px solid #BBBBBB",
                         borderRadius:"10px",
                         fontSize:"16px"}}
-                        onClick={()=>{}}
+                        onClick={()=>{
+                            console.log(
+                                {
+                                    "boardName":`${title}`,
+                                    "boardDesc":`${desc}`,
+                                    "category":`${category}`,
+                                    "price":`${price}`,
+                                    "storeType":[`${take}`,`${give}`],
+                                    "boardAddr":`${zonecode} ${addr} ${extraAddr}`,
+                                    "rentStartDate":`${rendStartDate}`,
+                                    "rentEndDate":`${rendEndDate}`,
+                                    "imgSrc":"대충 이미지 URL",
+                                }
+                            )
+
+                        }}
                         >보관신청하기</Button>
                     </div>
                 </div>
