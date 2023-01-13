@@ -1,14 +1,16 @@
 import * as React from 'react';
 import Header from "../component/public/Header";
-import { Button, Modal, Box, TextField } from "@mui/material";
+import { Button, Modal, Box } from "@mui/material";
 
 import ImageSlider from '../component/boardlist/ImageSlider';
-import ProductsList from '../component/boardlist/ProductsList';
+import BoardList from '../component/boardlist/BoardList';
+import SearchBar from '../component/boardlist/SearchBar';
 
 export default function BoardListPage () {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [cate, setCate]=React.useState(null);
 
     return (
         <div style={{width:"100%"}}>
@@ -29,33 +31,39 @@ export default function BoardListPage () {
                                     display:"flex",
                                     alignItems:"center",
                                     padding:"20px",}}>
-                            <Button style={{color:"white",fontSize:"16px",
+                            <Button onClick={() => setCate('Package')}
+                                    style={{color:"white",fontSize:"16px",
                                             width:"180px", height:"85px",
                                             borderRadius: "16px", padding:"5px",
                                             background:"#202225"}}>PACKAGE</Button>
-                            <Button style={{color:"white",fontSize:"16px",
+                            <Button onClick={() => setCate('Tent / Tarp')}
+                                    style={{color:"white",fontSize:"16px",
                                             width:"180px", height:"85px",
                                             borderRadius: "16px",
                                             background:"#202225"}}>Tent / Tarp</Button>
-                            <Button style={{color:"white",fontSize:"16px",
+                            <Button onClick={() => setCate('Bedding')}
+                                    style={{color:"white",fontSize:"16px",
                                             width:"180px", height:"85px",
                                             borderRadius: "16px",
                                             background:"#202225"}}>
                             Bedding
                             Seasonal items</Button>
-                            <Button style={{color:"white",fontSize:"16px",
+                            <Button onClick={() => setCate('Chair / Table')}
+                                    style={{color:"white",fontSize:"16px",
                                             width:"180px", height:"85px",
                                             borderRadius: "16px",
                                             background:"#202225"}}>
                             Chair / Table
                             Furniture</Button>
-                            <Button style={{color:"white",fontSize:"16px",
+                            <Button onClick={() => setCate('Brazier / Burner')}
+                                    style={{color:"white",fontSize:"16px",
                                             width:"180px", height:"85px",
                                             borderRadius: "16px",
                                             background:"#202225"}}>
                             Brazier / Burner
                             Others</Button>
-                            <Button style={{color:"white",fontSize:"16px",
+                            <Button onClick={() => setCate('Coppel / Ice box')}
+                                    style={{color:"white",fontSize:"16px",
                                             width:"180px", height:"85px",
                                             borderRadius: "16px",
                                             background:"#202225"}}>
@@ -75,24 +83,17 @@ export default function BoardListPage () {
                                 top: '50%',
                                 left: '50%',
                                 transform: 'translate(-50%, -50%)',
-                                width: 400,
+                                width: 800,
                                 bgcolor: 'background.paper',
-                                border: '2px solid #000',
                                 boxShadow: 24,
                                 p: 4,
                                 backgroundColor:"white"
                             }}>
-                                <h2>Text</h2>
-                                <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+                                <SearchBar />
                             </Box>
                         </Modal>
                     </div>
-                    <ProductsList />
-                    
-
-
-                    
-                    
+                    <BoardList cate={cate} />  
                 </div>
             </div>
         </div>

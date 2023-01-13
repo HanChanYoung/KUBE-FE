@@ -1,10 +1,16 @@
-export function Card({ category, imageurl, desc, price }) {
+import { useNavigate } from "react-router-dom";
+
+export function Card({ board_id, category, imageurl, desc, price }) {
+    const navigate = useNavigate();
     return (
       <div style={{
                     maxWidth:"50%",
                     display:"inline-block",
                     }}>
-        <div style={{margin:"20px",
+        <div onClick={() => {
+          navigate(`/brp/${board_id}`)
+        }}
+            style={{margin:"20px",
                     width:"300px", height:"300px",
                     overflow:"hidden",
                     borderRadius:"20px",
@@ -12,7 +18,7 @@ export function Card({ category, imageurl, desc, price }) {
                     animation:"ease-in-out",
                     backgroundColor:"#EBEBF5",
                     textAlign:"center",
-                    display:"table"}}>
+                    display:"table",}}>
           <div style={{overflow:"hidden",
                         display:"table-cell",
                         verticalAlign:"middle"}}>
@@ -53,22 +59,6 @@ export function Card({ category, imageurl, desc, price }) {
                 <div>{price}</div>
             </div>
           </div>
-          {/* <div style={{display:"flex",
-                        justifyContent:"center",
-                        margin:"0rem"}}>
-            <button style={{padding:"0.5rem",
-                            backgroundColor:"white",
-                            border:"none",
-                            transition:"0.2s",
-                            marginBottom:"10px",
-                            borderRadius:"3px"}}>
-              <a style={{textTransform:"uppercase",
-                        color:"#189cfc",
-                        textDecoration:"none",
-                        fontWeight:"bold"}} 
-                href="#">View More</a>
-            </button>
-          </div> */}
       </div>
     );
   }
