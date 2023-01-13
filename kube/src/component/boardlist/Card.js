@@ -1,10 +1,16 @@
-export function Card({ category, imageurl, desc, price }) {
+import { useNavigate } from "react-router-dom";
+
+export function Card({ board_id, category, imageurl, desc, price }) {
+    const navigate = useNavigate();
     return (
       <div style={{
                     maxWidth:"50%",
                     display:"inline-block",
                     }}>
-        <div style={{margin:"20px",
+        <div onClick={() => {
+          navigate(`/brp/${board_id}`)
+        }}
+            style={{margin:"20px",
                     width:"300px", height:"300px",
                     overflow:"hidden",
                     borderRadius:"20px",

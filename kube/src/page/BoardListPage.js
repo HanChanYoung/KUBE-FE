@@ -3,7 +3,7 @@ import Header from "../component/public/Header";
 import { Button, Modal, Box, TextField } from "@mui/material";
 
 import ImageSlider from '../component/boardlist/ImageSlider';
-import ProductsList from '../component/boardlist/ProductsList';
+import BoardList from '../component/boardlist/BoardList';
 
 export default function BoardListPage () {
     const [open, setOpen] = React.useState(false);
@@ -87,12 +87,7 @@ export default function BoardListPage () {
                             </Box>
                         </Modal>
                     </div>
-                    <ProductsList />
-                    
-
-
-                    
-                    
+                    <BoardList />  
                 </div>
             </div>
         </div>
