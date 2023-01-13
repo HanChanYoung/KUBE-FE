@@ -4,11 +4,11 @@ import usePagination from "./Pagination";
 import { Card } from "./Card";
 
 
-export default function BoardList () {
+export default function BoardList (props) {
     const products = [
         {   
             id: 1,
-            category:"Tent",
+            category:"Tent / Tarp",
             desc: "원터치 텐트",
             price: "27,000",
             img: "/image-tent1.png"
@@ -22,9 +22,9 @@ export default function BoardList () {
         },
         {   
             id: 3,
-            category:"Package",
-            desc: "풀세트",
-            price: "108,000",
+            category:"Bedding",
+            desc: "Bedding",
+            price: "10,000",
             img: "/image-package1.png"
         },
         {   
@@ -50,7 +50,7 @@ export default function BoardList () {
         },
         {   
             id: 7,
-            category:"Package",
+            category:"Chair / Table",
             desc: "풀세트",
             price: "108,000",
             img: "/image-package1.png"
@@ -64,7 +64,7 @@ export default function BoardList () {
         },
         {   
             id: 9,
-            category:"Tent",
+            category:"Brazier / Burner",
             desc: "원터치 텐트",
             price: "27,000",
             img: "/image-tent1.png"
@@ -92,7 +92,7 @@ export default function BoardList () {
         },
         {   
             id: 13,
-            category:"Package",
+            category:"Coppel / Ice box",
             desc: "풀세트",
             price: "108,000",
             img: "/image-package1.png"
@@ -106,7 +106,7 @@ export default function BoardList () {
         },
         {   
             id: 15,
-            category:"Tent",
+            category:"Tent / Tarp",
             desc: "원터치 텐트",
             price: "27,000",
             img: "/image-tent1.png"
@@ -134,7 +134,7 @@ export default function BoardList () {
         },
         {   
             id: 19,
-            category:"Tent",
+            category:"Tent / Tarp",
             desc: "원터치 텐트",
             price: "27,000",
             img: "/image-tent1.png"
@@ -158,17 +158,24 @@ export default function BoardList () {
                 <div style={{textAlign:"center"}}>
                     {_DATA.currentData().map(v => {
                         return (
+                            props.cate?props.cate===v.category?
                             <Card
                                 board_id={v.id}
                                 category={v.category}
                                 imageurl={"/img" + v.img}
                                 desc={v.desc}
                                 price={v.price + "원"}
-                            />
+                            />:null
+                            :<Card
+                            board_id={v.id}
+                            category={v.category}
+                            imageurl={"/img" + v.img}
+                            desc={v.desc}
+                            price={v.price + "원"}
+                        />
                         );
                     })}
                 </div>
-                {/* <CardsDisplay productCard={productCard} loading={loading} /> */}
                 <div>
                 <Pagination 
                     style={{
