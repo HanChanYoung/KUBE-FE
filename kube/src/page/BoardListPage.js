@@ -4,6 +4,7 @@ import { Button, Modal, Box, TextField } from "@mui/material";
 
 import ImageSlider from '../component/boardlist/ImageSlider';
 import BoardList from '../component/boardlist/BoardList';
+import SearchBar from '../component/boardlist/SearchBar';
 
 export default function BoardListPage () {
     const [open, setOpen] = React.useState(false);
@@ -75,15 +76,13 @@ export default function BoardListPage () {
                                 top: '50%',
                                 left: '50%',
                                 transform: 'translate(-50%, -50%)',
-                                width: 400,
+                                width: 800,
                                 bgcolor: 'background.paper',
-                                border: '2px solid #000',
                                 boxShadow: 24,
                                 p: 4,
                                 backgroundColor:"white"
                             }}>
-                                <h2>Text</h2>
-                                <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+                                <SearchBar />
                             </Box>
                         </Modal>
                     </div>
