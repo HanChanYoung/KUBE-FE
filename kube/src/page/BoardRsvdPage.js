@@ -10,7 +10,7 @@ import '../component/boardrsvdpage/calendar.css'
 import { SET_RSVD_INFO,SET_RSVD_PAGE } from "../state/slice/BoardRsvdSlice";
 
 export default function BoardRsvdPage(){
-
+    
     const isLogin=useSelector((state)=>state.loginSlice.isLogin);
     const rsvdPage=useSelector((state)=>state.boardRsvdSlice);
     const navigate=useNavigate();

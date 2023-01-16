@@ -3,11 +3,7 @@ import { useState, useEffect, useMemo } from "react";
 import Header from "../component/public/Header";
 import { Button, Modal, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
 import ImageSlider from '../component/boardlist/ImageSlider';
-
-import NativeSelect from "@mui/material/NativeSelect";
-import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
@@ -363,7 +359,7 @@ export default function BoardListPage () {
                     </div>
 
     {/* ---------- BoardList ---------- */}
-                    <div>
+                    <div style={{width:"1500px",margin:"auto"}}>
                         <div style={{fontFamily:"sans-serif", textAlign:"center"}}>
                             <div style={{textAlign:"center"}}>
                                 {boardsData.map((v) => {
