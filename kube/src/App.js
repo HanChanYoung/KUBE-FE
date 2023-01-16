@@ -21,6 +21,7 @@ function App() {
         {/* <Route path="rtp" element={<ReduxTestPage/>}/> */}
         <Route path="brp" element={<BoardRsvdPage/>}/>
         <Route path="bcp" element={<BoardCreatePage/>}/>
+
       </Routes>
     </Router>
   );

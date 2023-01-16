@@ -2,7 +2,7 @@ import {React,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {useDispatch} from 'react-redux';
-import { SET_LOGIN } from '../state/slice/LoginSlice';
+import { SET_LOGIN,SET_UID } from '../state/slice/LoginSlice';
 
 export default function Login(){
 
@@ -12,7 +12,8 @@ export default function Login(){
     const navigate=useNavigate();
     const dispatch=useDispatch();
 
-    useEffect(async() =>{
+    useEffect(() =>{
+        async function fetchData(){
         // console.log(uri);
         // console.log(arr[1]);
         await axios.post("https://kauth.kakao.com/oauth/token",{
@@ -36,6 +37,8 @@ export default function Login(){
             })
                 .then(function(response) {
                     console.log(response);
+                    console.log(response.id); 
+                    dispatch(SET_UID(response.id))
                     dispatch(SET_LOGIN());
                 })
                 .catch(function(error) {
@@ -44,8 +47,10 @@ export default function Login(){
          })
         .catch((res)=>console.log(res));
         navigate("/");
-
+        }
+        fetchData();
     })
+    
     return(
         <div></div>
     )    
