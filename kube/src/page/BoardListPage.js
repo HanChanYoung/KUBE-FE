@@ -338,71 +338,28 @@ export default function BoardListPage () {
                         </div>
                     </div>
                     <div style={{width:"100%",height:"56px"}}>
+                        <div style={{float:"right",
+                                    marginRight:"55px",
+                                    fontSize:"20px"}}>
+                            <TextField id="standard-search" type="search" variant="standard"
+                                placeholder="검색어를 입력하세요."
+                                value={searchTerm}
+                                onChange={(e) => {
+                                    setSearchTerm(e.target.value);
+                                    setCurrentPage(1);
+                                }}
+                                />
+                            <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+                            <SearchIcon />
+                            </IconButton>
+                        </div>
+                    </div>
+                    <div style={{width:"100%",height:"56px"}}>
                         <Button onClick={resetFilter}
                                 style={{color:"black",fontSize:"20px",
                                         width:"141px", height:"56px",
                                         float:"right", marginRight:"30px"
                                         }}>Reset</Button>
-                        <Button onClick={handleOpen}
-                                style={{color:"black",fontSize:"20px",
-                                        width:"141px", height:"56px",
-                                        float:"right", marginRight:"30px"
-                                        }}>세부검색</Button>
-                        <Modal open={open} onClose={handleClose}>
-                            <Box style={{
-                                position: 'absolute',
-                                top: '50%',
-                                left: '50%',
-                                transform: 'translate(-50%, -50%)',
-                                width: 800,
-                                bgcolor: 'background.paper',
-                                boxShadow: 24,
-                                p: 4,
-                                backgroundColor:"white"
-                            }}>
-                                {/* <SearchBar /> */}
-                                <div style={{ margin: 20, padding: 20 }}>
-                                    <Box
-                                        component="form"
-                                        sx={{
-                                        "& .MuiTextField-root": { m: 1, width: "40ch" },
-                                        }}
-                                        noValidate
-                                        autoComplete="off"
-                                    >
-                                        {" "}
-                                        <FormControl sx={{ m: 1, minWidth: 120 }}>
-                                        <NativeSelect
-                                            defaultValue={"none"}
-                                            inputProps={{
-                                            name: "category",
-                                            id: "uncontrolled-native",
-                                            }}
-                                        >
-                                            <option value={"none"}>통합검색</option>
-                                            <option value={"package"}>Package</option>
-                                            <option value={"tent"}>Tent / Tarp</option>
-                                            <option value={"bedding"}>Bedding / Seasonal items</option>
-                                            <option value={"chair"}>Chair / Table</option>
-                                            <option value={"brazier"}>Brazier / Burner</option>
-                                            <option value={"coppel"}>Coppel / Ice box</option>
-                                        </NativeSelect>
-                                        </FormControl>
-                                        <TextField id="standard-search" type="search" variant="standard"
-                                            placeholder="검색어를 입력하세요."
-                                            value={searchTerm}
-                                            onChange={(e) => {
-                                                setSearchTerm(e.target.value);
-                                                setCurrentPage(1);
-                                            }}
-                                            />
-                                        <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
-                                        <SearchIcon />
-                                        </IconButton>
-                                    </Box>
-                                </div>
-                            </Box>
-                        </Modal>
                     </div>
 
     {/* ---------- BoardList ---------- */}
@@ -419,7 +376,7 @@ export default function BoardListPage () {
                                                         borderRadius:"20px",
                                                         transition:"0.5s",
                                                         animation:"ease-in-out",
-                                                        backgroundColor:"#EBEBF5",
+                                                        backgroundColor:"#EEEEEE",
                                                         textAlign:"center",
                                                         display:"table",}}>
                                             <div style={{overflow:"hidden",
@@ -472,7 +429,7 @@ export default function BoardListPage () {
                                                         borderRadius:"20px",
                                                         transition:"0.5s",
                                                         animation:"ease-in-out",
-                                                        backgroundColor:"#EBEBF5",
+                                                        backgroundColor:"#EEEEEE",
                                                         textAlign:"center",
                                                         display:"table",}}>
                                             <div style={{overflow:"hidden",
