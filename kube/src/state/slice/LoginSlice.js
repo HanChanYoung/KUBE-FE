@@ -4,6 +4,7 @@ export const LoginSlice=createSlice(
     {
         name:'LoginSlice',
         initialState:{
+            uid:null,
             isLogin:false,
         },
         reducers:{
@@ -12,6 +13,9 @@ export const LoginSlice=createSlice(
             },
             SET_LOGOUT:(state,action)=>{
                 state.isLogin=false;
+            },
+            SET_UID:(state,action)=>{
+                state.uid=action.payload
             }
         }
     }
@@ -21,5 +25,6 @@ export const LoginSlice=createSlice(
 export const {
     SET_LOGIN,
     SET_LOGOUT,
+    SET_UID
 } = LoginSlice.actions;
 

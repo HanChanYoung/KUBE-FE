@@ -3,7 +3,6 @@ import {useNavigate} from 'react-router-dom'
 import KaKaoLogin from "./header/KakaoLogin";
 import KakaoLogined from "./header/KakaoLogined";
 import {useSelector} from 'react-redux';
-import zIndex from "@mui/material/styles/zIndex";
 
 export default function Header(){
 
@@ -18,7 +17,8 @@ export default function Header(){
                         justifyContent:"center",
                         alignItems:"center",
                         backgroundColor:"white",
-                        zIndex:1
+                        zIndex:1,
+                        borderBottom:"1px solid #BBBBBB"
                         }}>
                 <div style={{width:"95%",
                             height:"80px",

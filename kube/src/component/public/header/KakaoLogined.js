@@ -68,26 +68,27 @@ export default function KakaoLogined(){
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem>
+                <MenuItem
+                onClick={()=>{navigate("/bcp")}}>
                     <ListItemIcon>
                     <Create fontSize="small" />
                     </ListItemIcon>
                     게시물 작성
                 </MenuItem>
 
-                <MenuItem>
+                <MenuItem onClick={()=>{navigate("/mypage")}}>
                 <ListItemIcon>
                     <Person fontSize="small" />
                 </ListItemIcon>
                 My Page
                 </MenuItem>
 
-                <MenuItem>
+                {/* <MenuItem>
                 <ListItemIcon>
                     <Settings fontSize="small" />
                 </ListItemIcon>
                 Settings
-                </MenuItem>
+                </MenuItem> */}
                 
                 <MenuItem onClick={()=>{
                     Kakao.API.request({
