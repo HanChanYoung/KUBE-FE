@@ -17,7 +17,8 @@ export default function Header(){
                         justifyContent:"center",
                         alignItems:"center",
                         backgroundColor:"white",
-                        zIndex:1
+                        zIndex:1,
+                        borderBottom:"1px solid #BBBBBB"
                         }}>
                 <div style={{width:"95%",
                             height:"80px",
