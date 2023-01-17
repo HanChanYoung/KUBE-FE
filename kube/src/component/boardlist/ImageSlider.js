@@ -21,7 +21,7 @@ export default class ImageSlider extends Component {
             slidesToScroll: 1,
             arrows:true,
             autoplay:true,
-            autoplaySpeed: 2500
+            autoplaySpeed: 3500
         };
 
         return (
@@ -29,11 +29,11 @@ export default class ImageSlider extends Component {
                 <Slider {...settings}>
                     {items.map(item => {
                         return(
-                            <div align="center" style={{width:"100%",height:"340px"}}>
+                            <div align="center" style={{width:"100%",height:"380px"}}>
                                 <div style={{backgroundColor:item.bgcolor}}>
                                     <img style={{position: "relative",
-                                                    width: "1455px",
-                                                    Height: "340px",}}
+                                                    width: "100%",
+                                                    Height: "380px",}}
                                             src={item.url}/>
                                 </div>
                             </div>

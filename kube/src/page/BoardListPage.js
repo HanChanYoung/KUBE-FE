@@ -261,7 +261,7 @@ export default function BoardListPage () {
             <Header />
             <div>
                 <div>
-                    <div style={{height:"360px",
+                    <div style={{height:"400px",
                                 overflow:"hidden"}}>
                         <ImageSlider />
                     </div>
@@ -366,7 +366,9 @@ export default function BoardListPage () {
                                     return (
                                         cate?cate===v.category?
                                         <div key={v.id} style={{ maxWidth:"50%", display:"inline-block"}}>
-                                            <div style={{margin:"20px",
+                                            <div
+                                            onClick={() => {navigate(`/brp/${v.id}`)}} 
+                                            style={{margin:"20px",
                                                         width:"300px", height:"300px",
                                                         overflow:"hidden",
                                                         borderRadius:"20px",

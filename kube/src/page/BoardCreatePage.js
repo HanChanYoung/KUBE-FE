@@ -106,6 +106,7 @@ export default function BoardCreatePage(){
     }
     const handleChangeImage =async e => {
         console.log(e.target.files[0]);
+        // "/storeImage/userID+생성날짜(시간)"
             const compressedFile = await imageCompression(e.target.files[0], options);
             encodeFileToBase64(compressedFile);
         }
