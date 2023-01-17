@@ -1,10 +1,16 @@
 import axios from 'axios'
 
-// const BASE_URL = 'http://localhost:8081';
+const BASE_URL = 'http://localhost:8081';
 
-export const CREATE_BOARD_PAGE = async () => {
-    const { data } = await axios.post(`/api/posts`);
-    return data;
+export const CREATE_BOARD_PAGE = (req) => {
+    console.log(req)
+    axios.post('/api/posts',req)
+    .then((response) => {
+    console.log(response);
+    })
+    .catch((error) => {
+    console.log(error);
+    });
 };
 
 export const GET_BOARD_PAGE = async (boardId) => {
