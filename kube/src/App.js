@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<BoardListPage/>}/>
         <Route path="/login" element={<Login/>}/>
         {/* <Route path="rtp" element={<ReduxTestPage/>}/> */}
-        <Route path="brp" element={<BoardRsvdPage/>}/>
+        <Route path="/brp/:boardId" element={<BoardRsvdPage/>}/>
         <Route path="bcp" element={<BoardCreatePage/>}/>
 
       </Routes>
