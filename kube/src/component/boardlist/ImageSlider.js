@@ -2,21 +2,17 @@ import React, {Component} from "react";
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import styled from 'styled-components';
 
 const items = [
-    // {id: 1, url: '/img/ABOUT.png'},
-    // {id: 2, url: '/img/ABOUT-2.png'},
-    // {id: 3, url: '/img/ABOUT-3.png'},
-    // {id: 4, url: '/img/ABOUT-4.png'},
-    // {id: 5, url: '/img/ABOUT-5.png'},
-    {id: 1, url: '/img/test.png',bgcolor:"white"},
-    {id: 2, url: '/img/test2.png',bgcolor:"black"},
+    {id: 1, url: '/img/banner-1.png',bgcolor:"white"},
+    {id: 2, url: '/img/banner-2.png',bgcolor:"black"},
+    {id: 3, url: '/img/banner-3.png',bgcolor:"white"},
+    {id: 4, url: '/img/banner-4.png',bgcolor:"white"},
+    {id: 5, url: '/img/banner-5.png',bgcolor:"black"},
 ];
 
 export default class ImageSlider extends Component {
     render() {
-
         const settings = {
             dots: true,
             infinite: true,
@@ -46,8 +42,5 @@ export default class ImageSlider extends Component {
                 </Slider>
             </div>
         );
-
-
-
     }
 }
