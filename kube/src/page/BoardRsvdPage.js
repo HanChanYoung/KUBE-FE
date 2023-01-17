@@ -54,7 +54,7 @@ export default function BoardRsvdPage(){
     const date=new Date()
     const isCheck=false
     const disabledDates = [
-        new Date('2023-01-26'),
+        // new Date('2023-01-26'),
     ];
     //-----------------
     const {isLoading,data,isError,error} = useQuery("BoardPage",()=>GET_BOARD_PAGE(boardId.boardId));
@@ -98,7 +98,7 @@ export default function BoardRsvdPage(){
                                 fontWeight:"bold",
                                 textDecorationLine:"underline"
                             }}>
-                                {data.categoryId}
+                                {data.categoryName}
                                 </Typography>
 
                             <Typography stlye={{
