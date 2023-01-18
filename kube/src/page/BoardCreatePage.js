@@ -8,7 +8,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../component/boardrsvdpage/calendar.css'
 import imageCompression from 'browser-image-compression';
-import { CREATE_BOARD_PAGE } from "../config";
+import { CREATE_BOARD_PAGE, IMAGE_DOWNLOAD } from "../config";
 
 function leftPad(value) {
     if (value >= 10) {
@@ -445,6 +445,7 @@ export default function BoardCreatePage(){
                                 "rentEndDate":`${rendEndDate}`,
                                 "imgSrc":"대충 이미지 URL",
                             })
+                            // IMAGE_DOWNLOAD();
                         }}
                         >보관신청하기</Button>
                     </div>

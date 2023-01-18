@@ -1,74 +1,77 @@
 // import * as React from 'react';
 import { useState, useEffect, useMemo } from "react";
 import Header from "../component/public/Header";
-import { Button, Modal, Box } from "@mui/material";
+import { Button, Modal, Box ,CircularProgress} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ImageSlider from '../component/boardlist/ImageSlider';
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
+import { GET_BOARD_LIST } from "../config";
+import axios from 'axios'
+
 
 export default function BoardListPage () {
     const products = [
         {   
             id: 1,
-            category:"Tent / Tarp",
+            category:"TENT / TARP",
             desc: "원터치 텐트",
             price: "27,000",
             img: "/image-tent1.png"
         },
         {   
             id: 2,
-            category:"Package",
+            category:"PACKAGE",
             desc: "풀세트",
             price: "108,000",
-            img: "/image-package1.png"
+            img: "/image-PACKAGE1.png"
         },
         {   
             id: 3,
-            category:"Bedding",
-            desc: "Bedding",
+            category:"Bedding / Seasonal items",
+            desc: "Bedding / Seasonal items",
             price: "10,000",
-            img: "/image-package1.png"
+            img: "/image-PACKAGE1.png"
         },
         {   
             id: 4,
-            category:"Package",
+            category:"PACKAGE",
             desc: "풀세트",
             price: "108,000",
-            img: "/image-package1.png"
+            img: "/image-PACKAGE1.png"
         },
         {   
             id: 5,
-            category:"Package",
+            category:"PACKAGE",
             desc: "풀세트",
             price: "108,000",
-            img: "/image-package1.png"
+            img: "/image-PACKAGE1.png"
         },
         {   
             id: 6,
-            category:"Package",
+            category:"PACKAGE",
             desc: "풀세트",
             price: "108,000",
-            img: "/image-package1.png"
+            img: "/image-PACKAGE1.png"
         },
         {   
             id: 7,
-            category:"Chair / Table",
+            category:"Chair / Table Furniture",
             desc: "풀세트",
             price: "108,000",
-            img: "/image-package1.png"
+            img: "/image-PACKAGE1.png"
         },
         {   
             id: 8,
-            category:"Package",
+            category:"PACKAGE",
             desc: "풀세트",
             price: "10,000",
             img: "/image-tent1.png"
         },
         {   
             id: 9,
-            category:"Brazier / Burner",
+            category:"Brazier / Burner Others",
             desc: "원터치 텐트",
             price: "27,000",
             img: "/image-tent1.png"
@@ -82,63 +85,63 @@ export default function BoardListPage () {
         },
         {   
             id: 11,
-            category:"Package",
+            category:"PACKAGE",
             desc: "풀세트",
             price: "108,000",
-            img: "/image-package1.png"
+            img: "/image-PACKAGE1.png"
         },
         {   
             id: 12,
-            category:"Package",
+            category:"PACKAGE",
             desc: "풀세트",
             price: "108,000",
-            img: "/image-package1.png"
+            img: "/image-PACKAGE1.png"
         },
         {   
             id: 13,
-            category:"Coppel / Ice box",
+            category:"Coppel / Ice box Tableware",
             desc: "풀세트",
             price: "108,000",
-            img: "/image-package1.png"
+            img: "/image-PACKAGE1.png"
         },
         {   
             id: 14,
-            category:"Package",
+            category:"PACKAGE",
             desc: "풀세트",
             price: "108,000",
-            img: "/image-package1.png"
+            img: "/image-PACKAGE1.png"
         },
         {   
             id: 15,
-            category:"Tent / Tarp",
+            category:"TENT / TARP",
             desc: "원터치 텐트",
             price: "27,000",
             img: "/image-tent1.png"
         },
         {   
             id: 16,
-            category:"Package",
+            category:"PACKAGE",
             desc: "풀세트",
             price: "108,000",
-            img: "/image-package1.png"
+            img: "/image-PACKAGE1.png"
         },
         {   
             id: 17,
-            category:"Package",
+            category:"PACKAGE",
             desc: "풀세트",
             price: "108,000",
-            img: "/image-package1.png"
+            img: "/image-PACKAGE1.png"
         },
         {   
             id: 18,
-            category:"Package",
+            category:"PACKAGE",
             desc: "풀세트",
             price: "10,000",
             img: "/image-tent1.png"
         },
         {   
             id: 19,
-            category:"Tent / Tarp",
+            category:"TENT / TARP",
             desc: "원터치 텐트",
             price: "27,000",
             img: "/image-tent1.png"
@@ -160,8 +163,9 @@ export default function BoardListPage () {
     const [cate, setCate] = useState(null);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        setBoards(products);
+    useEffect(async () => {
+        const { data } = await axios.get(`/api/posts`);
+        setBoards(data);
     }, []);
     const pageNumbers = [];
 
@@ -195,45 +199,45 @@ export default function BoardListPage () {
             )
         }
 
-        if (cate === "Package") {
+        if (cate === "PACKAGE") {
             computedBoard = computedBoard.filter(
                 board =>
-                cate === "Package" && board.category === "Package"
+                cate === "PACKAGE" && board.categoryName === "PACKAGE"
             );
         }
 
-        if (cate === "Tent / Tarp") {
+        if (cate === "TENT / TARP") {
             computedBoard = computedBoard.filter(
                 board =>
-                cate === "Tent / Tarp" && board.category === "Tent / Tarp"
+                cate === "TENT / TARP" && board.categoryName === "TENT / TARP"
             );
         }
 
-        if (cate === "Bedding") {
+        if (cate === "Bedding / Seasonal items") {
             computedBoard = computedBoard.filter(
                 board =>
-                cate === "Bedding" && board.category === "Bedding"
+                cate === "Bedding / Seasonal items" && board.categoryName === "Bedding / Seasonal items"
             );
         }
 
-        if (cate === "Chair / Table") {
+        if (cate === "Chair / Table Furniture") {
             computedBoard = computedBoard.filter(
                 board =>
-                cate === "Chair / Table" && board.category === "Chair / Table"
+                cate === "Chair / Table Furniture" && board.categoryName === "Chair / Table Furniture"
             );
         }
 
-        if (cate === "Brazier / Burner") {
+        if (cate === "Brazier / Burner Others") {
             computedBoard = computedBoard.filter(
                 board =>
-                cate === "Brazier / Burner" && board.category === "Brazier / Burner"
+                cate === "Brazier / Burner Others" && board.categoryName === "Brazier / Burner Others"
             );
         }
 
-        if (cate === "Coppel / Ice box") {
+        if (cate === "Coppel / Ice box Tableware") {
             computedBoard = computedBoard.filter(
                 board =>
-                cate === "Coppel / Ice box" && board.category === "Coppel / Ice box"
+                cate === "Coppel / Ice box Tableware" && board.categoryName === "Coppel / Ice box Tableware"
             );
         }
 
@@ -255,7 +259,7 @@ export default function BoardListPage () {
         setCurrentPage(1);
         setCate(null);
     };
-
+    
     return (
         <div style={{width:"100%"}}>
             <Header />
@@ -276,7 +280,7 @@ export default function BoardListPage () {
                                     alignItems:"center",
                                     padding:"20px",}}>
                             <Button onClick={() => {
-                                        setCate('Package');
+                                        setCate('PACKAGE');
                                         setCurrentPage(1);
                                     }}
                                     style={{color:"white",fontSize:"16px",
@@ -284,52 +288,51 @@ export default function BoardListPage () {
                                             borderRadius: "16px", padding:"5px",
                                             background:"#202225"}}>PACKAGE</Button>
                             <Button onClick={() => {
-                                        setCate('Tent / Tarp');
+                                        setCate('TENT / TARP');
                                         setCurrentPage(1);
                                     }}
                                     style={{color:"white",fontSize:"16px",
                                             width:"180px", height:"85px",
                                             borderRadius: "16px",
-                                            background:"#202225"}}>Tent / Tarp</Button>
+                                            background:"#202225"}}>TENT / TARP</Button>
                             <Button onClick={() => {
-                                        setCate('Bedding');
+                                        setCate('Bedding / Seasonal items');
                                         setCurrentPage(1);
                                     }}
                                     style={{color:"white",fontSize:"16px",
                                             width:"180px", height:"85px",
                                             borderRadius: "16px",
                                             background:"#202225"}}>
-                            Bedding
+                            Bedding /
                             Seasonal items</Button>
                             <Button onClick={() => {
-                                        setCate('Chair / Table');
+                                        setCate('Chair / Table Furniture');
                                         setCurrentPage(1);
                                     }}
                                     style={{color:"white",fontSize:"16px",
                                             width:"180px", height:"85px",
                                             borderRadius: "16px",
                                             background:"#202225"}}>
-                            Chair / Table
-                            Furniture</Button>
+                            Chair / Table Furniture</Button>
                             <Button onClick={() => {
-                                        setCate('Brazier / Burner');
+                                        setCate('Brazier / Burner Others');
                                         setCurrentPage(1);
                                     }}
                                     style={{color:"white",fontSize:"16px",
                                             width:"180px", height:"85px",
                                             borderRadius: "16px",
                                             background:"#202225"}}>
-                            Brazier / Burner
+                            Brazier /
                             Others</Button>
                             <Button onClick={() => {
-                                        setCate('Coppel / Ice box');
+                                        setCate('Coppel / Ice box Tableware');
                                         setCurrentPage(1);
                                     }}
                                     style={{color:"white",fontSize:"16px",
                                             width:"180px", height:"85px",
                                             borderRadius: "16px",
                                             background:"#202225"}}>
-                            Coppel / Ice box
+                            Coppel /
                             Tableware</Button>
                         </div>
                     </div>
@@ -364,9 +367,10 @@ export default function BoardListPage () {
                             <div style={{textAlign:"center"}}>
                                 {boardsData.map((v) => {
                                     return (
-                                        cate?cate===v.category?
-                                        <div key={v.id} style={{ maxWidth:"50%", display:"inline-block"}}>
-                                            <div style={{margin:"20px",
+                                        cate?cate===v.categoryName?
+                                        <div key={v.boardId} style={{ maxWidth:"50%", display:"inline-block"}}>
+                                            <div onClick={() => {navigate(`/brp/${v.boardId}`)}} 
+                                            style={{margin:"20px",
                                                         width:"300px", height:"300px",
                                                         overflow:"hidden",
                                                         borderRadius:"20px",
@@ -380,7 +384,7 @@ export default function BoardListPage () {
                                                             verticalAlign:"middle"}}>
                                                 <img style={{
                                                     maxWidth:"250px", maxHeight:"250px"}} 
-                                                    src={"/img"+`${v.img}`} alt="" />
+                                                    src={"/img"+`${v.imgSrc}`} alt="" />
                                             </div>
                                             </div>
                                             <div style={{margin:"10px", marginTop:"20px", marginBottom:"80px",}}>
@@ -392,7 +396,7 @@ export default function BoardListPage () {
                                                             display:"flex",
                                                             alignItems:"center"
                                                             }}>
-                                                <div>{`${v.category}`}</div>
+                                                <div>{`${v.categoryName}`}</div>
                                                 </div>
                                                 <div style={{
                                                             margin:"15px",
@@ -402,7 +406,7 @@ export default function BoardListPage () {
                                                             display:"flex",
                                                             alignItems:"center"
                                                             }}>
-                                                <div>{`${v.desc}`}</div>
+                                                <div>{`${v.boardName}`}</div>
                                                 </div>
                                                 <div style={{
                                                             margin:"15px",
@@ -417,8 +421,8 @@ export default function BoardListPage () {
                                             </div>
                                         </div>:null
                                         :
-                                        <div key={v.id} style={{ maxWidth:"50%", display:"inline-block"}}>
-                                            <div onClick={() => {navigate(`/brp/${v.id}`)}}
+                                        <div key={v.boardId} style={{ maxWidth:"50%", display:"inline-block"}}>
+                                            <div onClick={() => {navigate(`/brp/${v.boardId}`)}}
                                                 style={{margin:"20px",
                                                         width:"300px", height:"300px",
                                                         overflow:"hidden",
@@ -433,7 +437,7 @@ export default function BoardListPage () {
                                                             verticalAlign:"middle"}}>
                                                 <img style={{
                                                     maxWidth:"250px", maxHeight:"250px"}} 
-                                                    src={"/img"+`${v.img}`} alt="" />
+                                                    src={"/img"+`${v.imgSrc}`} alt="" />
                                             </div>
                                             </div>
                                             <div style={{margin:"10px", marginTop:"20px", marginBottom:"80px",}}>
@@ -445,7 +449,7 @@ export default function BoardListPage () {
                                                             display:"flex",
                                                             alignItems:"center"
                                                             }}>
-                                                <div>{`${v.category}`}</div>
+                                                <div>{`${v.categoryName}`}</div>
                                                 </div>
                                                 <div style={{
                                                             margin:"15px",
@@ -455,7 +459,7 @@ export default function BoardListPage () {
                                                             display:"flex",
                                                             alignItems:"center"
                                                             }}>
-                                                <div>{`${v.desc}`}</div>
+                                                <div>{`${v.boardName}`}</div>
                                                 </div>
                                                 <div style={{
                                                             margin:"15px",
