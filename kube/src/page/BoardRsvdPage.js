@@ -10,11 +10,30 @@ import '../component/boardrsvdpage/calendar.css'
 import { SET_RSVD_INFO,SET_RSVD_PAGE } from "../state/slice/BoardRsvdSlice";
 import { GET_BOARD_PAGE } from "../config";
 import { useQuery } from "react-query";
+import { CREATE_RSVD, GET_BOARD_PAGE } from "../config";
+import { useQuery } from "react-query";
+
+function leftPad(value) {
+    if (value >= 10) {
+        return value;
+    }
+
+    return `0${value}`;
+}
+
+function toStringByFormatting(source, delimiter = '-') {
+    const year = source.getFullYear();
+    const month = leftPad(source.getMonth() + 1);
+    const day = leftPad(source.getDate());
+
+    return [year, month, day].join(delimiter);
+}
 
 export default function BoardRsvdPage(){
     
     const boardId=useParams();
     const isLogin=useSelector((state)=>state.loginSlice.isLogin);
+    const uid=useSelector((state)=>state.loginSlice.uid);
     // const rsvdPage=useSelector((state)=>state.boardRsvdSlice);
     const navigate=useNavigate();
     const dispatch=useDispatch();
@@ -25,10 +44,12 @@ export default function BoardRsvdPage(){
             // console.log(boardId.boardId)
         }
     })
-
+    //날짜요
+    const [rendStartDate,setRendStartDate]=useState('');
+    const [rendEndDate,setRendEndDate]=useState('');
     //수령 및 반납 방법 TEST
-    const [take, setTake] = useState('');
-    const [give, setGive] = useState('');
+    const [take, setTake] = useState('직접');
+    const [give, setGive] = useState('직접');
 
     const handleChange = (event) => {
         setTake(event.target.value);
@@ -156,8 +177,8 @@ export default function BoardRsvdPage(){
                                     value={take}
                                     onChange={(e)=>{handleChange(e)}}
                                     >
-                                        <MenuItem value={'직접 수령'}>직접 수령</MenuItem>
-                                        <MenuItem value={'픽업 서비스'}>픽업 서비스</MenuItem>
+                                        <MenuItem value={'직접'}>직접 수령</MenuItem>
+                                        <MenuItem value={'서비스'}>픽업 서비스</MenuItem>
                                     </Select>
                                     <FormHelperText>수령 방법을 선택하세요</FormHelperText>
                                 </FormControl>
@@ -173,8 +194,8 @@ export default function BoardRsvdPage(){
                                     value={give}
                                     onChange={handleChange2}
                                     >
-                                        <MenuItem value={'직접 반납'}>직접 반납</MenuItem>
-                                        <MenuItem value={'픽업 서비스'}>픽업 서비스</MenuItem>
+                                        <MenuItem value={'직접'}>직접 반납</MenuItem>
+                                        <MenuItem value={'서비스'}>픽업 서비스</MenuItem>
                                     </Select>
                                     <FormHelperText>반납 방법을 선택하세요</FormHelperText>
                                 </FormControl>
@@ -250,7 +271,7 @@ export default function BoardRsvdPage(){
                         <Calendar
                         className="re-calendar"
                         selectRange="true"
-                        onChange={(value,event)=>{console.log(value,event)}}
+                        onChange={(value)=>{setRendStartDate(toStringByFormatting(value[0]));setRendEndDate(toStringByFormatting(value[1]));}}
                         minDate={new Date(data?.rentStartDate)}
                         maxDate={new Date(data?.rentEndDate)}
                         tileDisabled={({date, view}) =>
@@ -272,8 +293,19 @@ export default function BoardRsvdPage(){
                         borderRadius:"10px",
                         fontSize:"16px"}}
                         onClick={()=>{
-                            // console.log(rsvdPage)
-                            console.log(data)
+                            // console.log(data)
+                            CREATE_RSVD(
+                                {
+                                    "boardId":boardId.boardId,
+                                    "lenderId":`${uid}`,
+                                    "delvyOptionCode":`${take}${give}`,
+                                    "lenderAddr":`${zonecode} ${addr} ${extraAddr}`,
+                                    "rentStartDate":`${rendStartDate}`,
+                                    "rentEndDate":`${rendEndDate}`,
+                                    "rsvdId": 0,
+                                    "rsvdStatusCode": "예약중"
+                                }
+                            )
                         }}
                         >예약하기</Button>
                     </div>
