@@ -8,10 +8,8 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../component/boardrsvdpage/calendar.css'
 import { SET_RSVD_INFO,SET_RSVD_PAGE } from "../state/slice/BoardRsvdSlice";
-import { GET_BOARD_PAGE } from "../config";
 import { useQuery } from "react-query";
 import { CREATE_RSVD, GET_BOARD_PAGE } from "../config";
-import { useQuery } from "react-query";
 
 function leftPad(value) {
     if (value >= 10) {
