@@ -265,7 +265,7 @@ export default function BoardListPage () {
             <Header />
             <div>
                 <div>
-                    <div style={{height:"360px",
+                    <div style={{height:"400px",
                                 overflow:"hidden"}}>
                         <ImageSlider />
                     </div>
