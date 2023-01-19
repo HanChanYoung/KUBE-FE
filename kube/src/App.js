@@ -16,18 +16,12 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<BoardListPage/>}/>
+          {/* routing 예시 */}
+        <Route path="/" element={<Index/>}/>
         <Route path="/login" element={<Login/>}/>
-        {/* <Route path="rtp" element={<ReduxTestPage/>}/> */}
-        <Route path="/brp/:boardId" element={<BoardRsvdPage/>}/>
-        <Route path="bcp" element={<BoardCreatePage/>}/>
-
-        {/* routing 예시 */}
-      <Route path="/" element={<Index/>}/>
-      <Route path="/login" element={<Login/>}/>
-      <Route path="rtp" element={<ReduxTestPage/>}/>
-      <Route path="/boardlist" element={<BoardListPage/>}/>
-      <Route path="brp" element={<BoardRsvdPage/>}/>
+        <Route path="rtp" element={<ReduxTestPage/>}/>
+        <Route path="/boardlist" element={<BoardListPage/>}/>
+        <Route path="brp" element={<BoardRsvdPage/>}/>
       </Routes>
     </Router>
   );
