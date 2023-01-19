@@ -181,7 +181,7 @@ export default function BoardListPage () {
                 // board =>
                 // board.title.toLowerCase().includes(searchTerm.toLowerCase())
                 board =>
-                board.desc.toLowerCase().includes(searchTerm.toLowerCase())
+                board.boardName.toLowerCase().includes(searchTerm.toLowerCase())
             );
         }
 

@@ -11,6 +11,7 @@ import Login from './page/Login';
 import BoardListPage from './page/BoardListPage';
 import BoardRsvdPage from './page/BoardRsvdPage';
 import BoardCreatePage from './page/BoardCreatePage';
+import Index from './page';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
         {/* <Route path="rtp" element={<ReduxTestPage/>}/> */}
         <Route path="/brp/:boardId" element={<BoardRsvdPage/>}/>
         <Route path="bcp" element={<BoardCreatePage/>}/>
-
+        <Route path="index" element={<Index/>}/>
       </Routes>
     </Router>
   );
