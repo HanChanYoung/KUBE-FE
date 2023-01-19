@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {useDispatch} from 'react-redux';
 import { SET_LOGIN,SET_UID } from '../state/slice/LoginSlice';
+import Swal from 'sweetalert2';
 
 export default function Login(){
 
@@ -40,6 +41,21 @@ export default function Login(){
                     console.log(response.id); 
                     dispatch(SET_UID(response.id))
                     dispatch(SET_LOGIN());
+
+                    Swal.fire({
+                        toast: true,
+                        icon: 'success',
+                        title: `${response.properties.nickname}님 안녕하세요!`,
+                        animation: false,
+                        position: 'top',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        timerProgressBar: false,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                      });
                 })
                 .catch(function(error) {
                     console.log(error);
