@@ -8,6 +8,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../component/boardrsvdpage/calendar.css'
 import imageCompression from 'browser-image-compression';
+import { CREATE_BOARD_PAGE, IMAGE_DOWNLOAD, UPLOAD_IMAGE } from "../config";
 
 function leftPad(value) {
     if (value >= 10) {
@@ -27,6 +28,7 @@ function toStringByFormatting(source, delimiter = '-') {
 
 export default function BoardCreatePage(){
     const isLogin=useSelector((state)=>state.loginSlice.isLogin);
+    const uid=useSelector((state)=>state.loginSlice.uid);
     const navigate=useNavigate();
     //보관
     const [take, setTake] = useState('직접');
@@ -431,20 +433,21 @@ export default function BoardCreatePage(){
                         borderRadius:"10px",
                         fontSize:"16px"}}
                         onClick={()=>{
-                            console.log(
-                                {
-                                    "boardName":`${title}`,
-                                    "boardDesc":`${desc}`,
-                                    "category":`${category}`,
-                                    "price":`${price}`,
-                                    "storeType":[`${take}`,`${give}`],
-                                    "boardAddr":`${zonecode} ${addr} ${extraAddr}`,
-                                    "rentStartDate":`${rendStartDate}`,
-                                    "rentEndDate":`${rendEndDate}`,
-                                    "imgSrc":"대충 이미지 URL",
-                                }
-                            )
-
+                            CREATE_BOARD_PAGE({
+                                "boardId":0,
+                                "providerId":`${uid}`,
+                                "boardName":`${title}`,
+                                "boardDesc":`${desc}`,
+                                "categoryName":`${category}`,
+                                "price":parseInt(price),
+                                "delvyStatusCode":`${take}${give}`,
+                                "boardAddr":`${zonecode} ${addr} ${extraAddr}`,
+                                "rentStartDate":`${rendStartDate}`,
+                                "rentEndDate":`${rendEndDate}`,
+                                "imgSrc":"대충 이미지 URL",
+                            })
+                            
+                            UPLOAD_IMAGE(imageSrc)
                         }}
                         >보관신청하기</Button>
                     </div>
