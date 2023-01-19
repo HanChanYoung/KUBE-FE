@@ -304,6 +304,20 @@ export default function BoardRsvdPage(){
                                     "rsvdStatusCode": "예약중"
                                 }
                             )
+                            Swal.fire({
+                                // toast: true,
+                                icon: 'success',
+                                title: '예약이 완료되었습니다!',
+                                animation: false,
+                                position: 'middle',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                timerProgressBar: false,
+                                didOpen: (toast) => {
+                                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            });
                         }}
                         >예약하기</Button>
                     </div>
