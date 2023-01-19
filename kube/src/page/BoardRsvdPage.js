@@ -318,6 +318,7 @@ export default function BoardRsvdPage(){
                                   toast.addEventListener('mouseleave', Swal.resumeTimer)
                                 }
                             });
+                            navigate("/");
                         }}
                         >예약하기</Button>
                     </div>
