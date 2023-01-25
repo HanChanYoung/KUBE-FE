@@ -15,7 +15,18 @@ export const CREATE_BOARD_PAGE = async (req) => {
 
 export const GET_BOARD_PAGE = async (boardId) => {
     const { data } = await axios.get(`/api/posts/${boardId}`);
-    return data;
+    var disabledDate=[];
+    // console.log(data.reservedDate)
+    for(var i in data.reservedDate){
+        for(var j in data.reservedDate[i]){
+            console.log(data.reservedDate[i][j])
+            disabledDate.push(new Date(data.reservedDate[i][j]))
+            }
+    }
+    // console.log(disabledDate)
+    return {'data':data,
+    'disabledDate':disabledDate
+    };
 }
 
 export const GET_BOARD_LIST = async () => {

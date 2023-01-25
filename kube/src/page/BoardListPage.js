@@ -384,7 +384,7 @@ export default function BoardListPage () {
                                                             verticalAlign:"middle"}}>
                                                 <img style={{
                                                     maxWidth:"250px", maxHeight:"250px"}} 
-                                                    src={"/img"+`${v.imgSrc}`} alt="" />
+                                                    src={`${v.imgSrc}`} alt="" />
                                             </div>
                                             </div>
                                             <div style={{margin:"10px", marginTop:"20px", marginBottom:"80px",}}>
@@ -437,7 +437,7 @@ export default function BoardListPage () {
                                                             verticalAlign:"middle"}}>
                                                 <img style={{
                                                     maxWidth:"250px", maxHeight:"250px"}} 
-                                                    src={"/img"+`${v.imgSrc}`} alt="" />
+                                                    src={`${v.imgSrc}`} alt="" />
                                             </div>
                                             </div>
                                             <div style={{margin:"10px", marginTop:"20px", marginBottom:"80px",}}>

@@ -10,6 +10,7 @@ import '../component/boardrsvdpage/calendar.css'
 import { SET_RSVD_INFO,SET_RSVD_PAGE } from "../state/slice/BoardRsvdSlice";
 import { CREATE_RSVD, GET_BOARD_PAGE } from "../config";
 import { useQuery } from "react-query";
+import Swal from 'sweetalert2';
 
 function leftPad(value) {
     if (value >= 10) {
@@ -38,6 +39,20 @@ export default function BoardRsvdPage(){
     useEffect(() =>{
         if(!isLogin){
             navigate("/");
+            Swal.fire({
+                toast: true,
+                icon: 'error',
+                title: '로그인을 먼저 해주세요!',
+                animation: false,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: false,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
         }else{
             // console.log(boardId.boardId)
         }
@@ -50,9 +65,19 @@ export default function BoardRsvdPage(){
     const [give, setGive] = useState('직접');
 
     const handleChange = (event) => {
+        if(event.target.value=='직접'&&give=='직접'){
+            setIsCheck(true);
+        }else{
+            setIsCheck(false)
+        }
         setTake(event.target.value);
     };
     const handleChange2 = (event) => {
+        if(event.target.value=='직접'&&take=='직접'){
+            setIsCheck(true);
+        }else{
+            setIsCheck(false)
+        }
         setGive(event.target.value);
     };
 
@@ -71,10 +96,7 @@ export default function BoardRsvdPage(){
     };
 
     const date=new Date()
-    const isCheck=false
-    const disabledDates = [
-        // new Date('2023-01-26'),
-    ];
+    const [isCheck, setIsCheck] = useState(true);
     //-----------------
     const {isLoading,data,isError,error} = useQuery("BoardPage",()=>GET_BOARD_PAGE(boardId.boardId));
 
@@ -84,6 +106,10 @@ export default function BoardRsvdPage(){
     if(isError){
         return  <h2>Oops... {error.message}</h2>
     }
+    // // const disabledDates = [
+    // //     // new Date('2023-01-26'),
+    // // ];
+    console.log(data)
     return(
         <div>
             <Header/>
@@ -99,8 +125,13 @@ export default function BoardRsvdPage(){
                     }}>
                         <div style={{width:"650px",
                         height:"650px",
-                        backgroundColor:"black",
-                        borderRadius:"20px"}}></div>
+                        backgroundColor:"#EEEEEE",
+                        borderRadius:"20px",
+                        display:"flex",
+                        alignItems:"center",
+                        justifyContent:"center"}}>
+                            <img src={data.data.imgSrc} alt="상품 이미지" style={{maxWidth:"650px",maxHeight:"650px"}}></img>
+                        </div>
                     </div>
                 </div>
                 <div style={{width:"50%",height:"850px",}}>
@@ -117,13 +148,13 @@ export default function BoardRsvdPage(){
                                 fontWeight:"bold",
                                 textDecorationLine:"underline"
                             }}>
-                                {data.categoryName}
+                                {data.data.categoryName}
                                 </Typography>
 
                             <Typography stlye={{
                                 fontSize:"20px"
                             }}>
-                                {data.boardName}</Typography>
+                                {data.data.boardName}</Typography>
 
                             <Typography style={{
                                 float:"right",
@@ -131,7 +162,7 @@ export default function BoardRsvdPage(){
                                 fontWeight:"bold",
                                 marginTop:"20px"
                             }}>
-                                {data.price?.toLocaleString('en-US')}원</Typography>
+                                {data.data.price?.toLocaleString('en-US')}원</Typography>
                         </div>
                         <div style={{width:"600px",
                         height:"390px",
@@ -139,7 +170,7 @@ export default function BoardRsvdPage(){
                         display:"flex",
                         alignItems:"center",}}>
                             <div>
-                            {data.boardDesc
+                            {data.data.boardDesc
                             // .map((value)=>{
                             //     return(<Typography style={{fontSize:"18px"}}>{value}</Typography>)
                             // })
@@ -270,11 +301,11 @@ export default function BoardRsvdPage(){
                         className="re-calendar"
                         selectRange="true"
                         onChange={(value)=>{setRendStartDate(toStringByFormatting(value[0]));setRendEndDate(toStringByFormatting(value[1]));}}
-                        minDate={new Date(data?.rentStartDate)}
-                        maxDate={new Date(data?.rentEndDate)}
+                        minDate={new Date(data.data?.rentStartDate)}
+                        maxDate={new Date(data.data?.rentEndDate)}
                         tileDisabled={({date, view}) =>
                             (view === 'month') && // Block day tiles only
-                            disabledDates.some(disabledDate =>
+                            data.disabledDate.some(disabledDate =>
                                 date.getFullYear() === disabledDate.getFullYear() &&
                                 date.getMonth() === disabledDate.getMonth() &&
                                 date.getDate() === disabledDate.getDate()

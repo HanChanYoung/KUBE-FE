@@ -2,7 +2,7 @@ import Header from "../component/public/Header";
 import {useEffect ,useState,useRef} from "react";
 import {useSelector ,useDispatch} from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { Typography ,Select,TextField,MenuItem,FormControl,FormHelperText,Button,Menu} from "@mui/material";
+import { Typography ,Select,TextField,MenuItem,FormControl,FormHelperText,Button,Menu,Tooltip} from "@mui/material";
 import {useDaumPostcodePopup} from 'react-daum-postcode';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -65,7 +65,6 @@ export default function BoardCreatePage(){
             setIsCheck(false)
         }
         setGive(event.target.value);
-
     };
 
 
@@ -251,23 +250,23 @@ export default function BoardCreatePage(){
                                 width:"450px",
                                 color:"black",}
                             }}></TextField>
-
-                            <TextField 
-                            placeholder="가격 입력"
-                            variant="standard"
-                            onChange={(e)=>setPrice(e.target.value)}
-                            value={price}
-                            InputProps={{
-                                disableUnderline:true,
-                                style:{
-                                width:"150px",
-                                color:"black",
-                                float:"right",
-                                fontSize:"28px",
-                                fontWeight:"bold",
-                                marginTop:"50px",}
-                            }}></TextField>
-
+                            <Tooltip title="쉼표 없이 숫자만 적어주세요">
+                                <TextField 
+                                placeholder="가격 입력"
+                                variant="standard"
+                                onChange={(e)=>setPrice(e.target.value)}
+                                value={price}
+                                InputProps={{
+                                    disableUnderline:true,
+                                    style:{
+                                    width:"150px",
+                                    color:"black",
+                                    float:"right",
+                                    fontSize:"28px",
+                                    fontWeight:"bold",
+                                    marginTop:"50px",}
+                                }}></TextField>
+                            </Tooltip>
                             {/* <Typography style={{
                                 float:"right",
                                 fontSize:"28px",
@@ -434,6 +433,28 @@ export default function BoardCreatePage(){
                         borderRadius:"10px",
                         fontSize:"16px"}}
                         onClick={()=>{
+                            var url;
+                            switch(category){
+                                case "PACKAGE":
+                                    url="/img/default/image-Package-1.png"
+                                    break;
+                                case "TENT / TARP":
+                                    url="/img/default/image-Tent-1.png"
+                                    break;
+                                case "Bedding / Seasonal items":
+                                    url="/img/default/image-Bedding-1.png"
+                                    break;
+                                case "Chair / Table Furniture":
+                                    url="/img/default/image-Chair-1.png"
+                                    break;
+                                case "Brazier / Burner Others":
+                                    url="/img/default/image-Brazier-1.png"
+                                    break;
+                                case "Coppel / Ice box Tableware":
+                                    url="/img/default/image-Coppel-1.png"
+                                    break;
+                            }
+
                             CREATE_BOARD_PAGE({
                                 "boardId":0,
                                 "providerId":`${uid}`,
@@ -445,10 +466,10 @@ export default function BoardCreatePage(){
                                 "boardAddr":`${zonecode} ${addr} ${extraAddr}`,
                                 "rentStartDate":`${rendStartDate}`,
                                 "rentEndDate":`${rendEndDate}`,
-                                "imgSrc":"대충 이미지 URL",
+                                "imgSrc":url,
                             })
                             
-                            UPLOAD_IMAGE(imageSrc)
+                            // UPLOAD_IMAGE(imageSrc)
 
                             Swal.fire({
                                 // toast: true,
@@ -460,8 +481,8 @@ export default function BoardCreatePage(){
                                 timer: 1500,
                                 timerProgressBar: false,
                                 didOpen: (toast) => {
-                                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
                                 }
                             });
                             navigate("/");
