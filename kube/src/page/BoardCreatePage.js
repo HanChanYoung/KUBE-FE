@@ -9,6 +9,7 @@ import 'react-calendar/dist/Calendar.css';
 import '../component/boardrsvdpage/calendar.css'
 import imageCompression from 'browser-image-compression';
 import { CREATE_BOARD_PAGE, IMAGE_DOWNLOAD, UPLOAD_IMAGE } from "../config";
+import Swal from 'sweetalert2'
 
 function leftPad(value) {
     if (value >= 10) {
@@ -448,6 +449,22 @@ export default function BoardCreatePage(){
                             })
                             
                             UPLOAD_IMAGE(imageSrc)
+
+                            Swal.fire({
+                                // toast: true,
+                                icon: 'success',
+                                title: '보관 신청이 완료되었습니다!',
+                                animation: false,
+                                position: 'middle',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                timerProgressBar: false,
+                                didOpen: (toast) => {
+                                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            });
+                            navigate("/");
                         }}
                         >보관신청하기</Button>
                     </div>
