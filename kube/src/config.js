@@ -52,7 +52,7 @@ export const IMAGE_DOWNLOAD = async (req) => {
     const { data } = await axios.get("https://objectstorage.kr-central-1.kakaoi.io/v1/eb454a58725f4cf4ba059729077e409b/bella-test/kube-image/춘식이방.png",
     {
         headers:{
-            "X-Auth-Token":"gAAAAABjyI93HMiCl7ObcUhc3_qxZvZcAHpbZiRaZkGF5M1DWgtgnPkxtpTJOSx2Dle2dZEpZ5WeGxnD5Rn_z_7DxAMlfxq9wIaP8MBEdKfpvmXbHJgygNF6kXkOIvhZzYYOtiL7ZMmOKDE9drf3_tTU94sA4620yPEAuuGVLLdn6pHSyb_2I772FD38nesBMSXvuVKdZckd"
+            "X-Auth-Token":"gAAAAABj0Sop7rSDXM7UNo4mLHS7IrMBiWDzFJI9qVNkfMs7Avmftqe8n0NNXMjQXon789_KjxY3sB5K-aT6FqTepONdec06iveyFO3mggYZd30vQSqjeiLupMoy7N_HH7qpFoBXs8n86wTpCZSpPkBAUpd2PYehsfT8TLgcFM9goFqh6lH6fGoJvXCKIYOnxZcQ_rKe4Taw"
         },
         responseType:"blob",
     })
@@ -64,12 +64,11 @@ export const UPLOAD_IMAGE = async (img) => {
     // const formData = new FormData();
     // formData.append('img', img);
 
-    const { data } = await axios.put(`https://objectstorage.kr-central-1.kakaoi.io/v1/eb454a58725f4cf4ba059729077e409b/bella-test/kube-image/1.png`,
+    const { data } = await axios.put("https://objectstorage.kr-central-1.kakaoi.io/v1/eb454a58725f4cf4ba059729077e409b/bella-test/kube-image/test1.png",
     {
-        headers : {
-            'X-Auth-Token':'gAAAAABjyI93HMiCl7ObcUhc3_qxZvZcAHpbZiRaZkGF5M1DWgtgnPkxtpTJOSx2Dle2dZEpZ5WeGxnD5Rn_z_7DxAMlfxq9wIaP8MBEdKfpvmXbHJgygNF6kXkOIvhZzYYOtiL7ZMmOKDE9drf3_tTU94sA4620yPEAuuGVLLdn6pHSyb_2I772FD38nesBMSXvuVKdZckd',
-            'Content-Type':'image/png'
-    }
+        headers:{
+            "X-Auth-Token":"gAAAAABj0Sop7rSDXM7UNo4mLHS7IrMBiWDzFJI9qVNkfMs7Avmftqe8n0NNXMjQXon789_KjxY3sB5K-aT6FqTepONdec06iveyFO3mggYZd30vQSqjeiLupMoy7N_HH7qpFoBXs8n86wTpCZSpPkBAUpd2PYehsfT8TLgcFM9goFqh6lH6fGoJvXCKIYOnxZcQ_rKe4Taw"
+        },
     });
     console.log(data);
     return data;

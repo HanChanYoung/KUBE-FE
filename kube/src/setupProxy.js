@@ -12,7 +12,7 @@ module.exports = (app) => {
     app.use(
             '/remote',
             createProxyMiddleware({
-                target: 'https://objectstorage.kr-central-1.kakaoi.io/v1/eb454a58725f4cf4ba059729077e409b/bella-test/kube-image/testest1.png',
+                target: 'https://objectstorage.kr-central-1.kakaoi.io/v1/eb454a58725f4cf4ba059729077e409b/bella-test/kube-image/*',
                 changeOrigin: true,
             }))
     }

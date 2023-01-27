@@ -416,7 +416,7 @@ export default function BoardListPage () {
                                                             display:"flex",
                                                             alignItems:"center"
                                                             }}>
-                                                    <div>{`${v.price}`}</div>
+                                                    <div>{`${v.price.toLocaleString('en-US')}`}</div>
                                                 </div>
                                             </div>
                                         </div>:null
@@ -469,7 +469,7 @@ export default function BoardListPage () {
                                                             display:"flex",
                                                             alignItems:"center"
                                                             }}>
-                                                    <div>{`${v.price}`}</div>
+                                                    <div>{`${v.price.toLocaleString('en-US')}`}</div>
                                                 </div>
                                             </div>
                                         </div>
