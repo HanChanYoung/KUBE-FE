@@ -4,7 +4,7 @@ const BASE_URL = 'http://localhost:8081';
 
 export const CREATE_BOARD_PAGE = async (req) => {
     console.log(req)
-    await axios.post('/api/posts',req)
+    await axios.post(`${process.env.REACT_APP_API_URL}/api/posts`,req)
     .then((response) => {
     console.log(response);
     })
@@ -14,7 +14,7 @@ export const CREATE_BOARD_PAGE = async (req) => {
 };
 
 export const GET_BOARD_PAGE = async (boardId) => {
-    const { data } = await axios.get(`/api/posts/${boardId}`);
+    const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/posts/${boardId}`);
     var disabledDate=[];
     // console.log(data.reservedDate)
     for(var i in data.reservedDate){
@@ -30,13 +30,13 @@ export const GET_BOARD_PAGE = async (boardId) => {
 }
 
 export const GET_BOARD_LIST = async () => {
-    const { data } = await axios.get(`/api/posts`);
+    const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/posts`);
     return data;
 }
 
 export const CREATE_RSVD = async (req) => {
     console.log(req)
-    const { data } = await axios.post(`/api/reservation/`,req);
+    const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/api/reservation/`,req);
     return data;
 }
 
@@ -52,7 +52,7 @@ export const IMAGE_DOWNLOAD = async (req) => {
     const { data } = await axios.get("https://objectstorage.kr-central-1.kakaoi.io/v1/eb454a58725f4cf4ba059729077e409b/bella-test/kube-image/춘식이방.png",
     {
         headers:{
-            "X-Auth-Token":"gAAAAABj0Sop7rSDXM7UNo4mLHS7IrMBiWDzFJI9qVNkfMs7Avmftqe8n0NNXMjQXon789_KjxY3sB5K-aT6FqTepONdec06iveyFO3mggYZd30vQSqjeiLupMoy7N_HH7qpFoBXs8n86wTpCZSpPkBAUpd2PYehsfT8TLgcFM9goFqh6lH6fGoJvXCKIYOnxZcQ_rKe4Taw"
+            "X-Auth-Token":"gAAAAABj0yy6wH8jmVTXShLxW3-5FxTP0nnrcCjqBlwHyWs58VX3YDyMoPumVVLYML1tIJ6ELu4nnDkQrEd62KAV1K3SHUCakNpHRVd4ha6AUyt5wbD4bHH-Wbn6Rn-GBefDPP7XOKMABx_LEdYL_-F4WEJ756w8l30Elf_dJpFJut92z6hsYvn68ZAx7PxlVXXIaOH6WR_G"
         },
         responseType:"blob",
     })
@@ -64,12 +64,14 @@ export const UPLOAD_IMAGE = async (img) => {
     // const formData = new FormData();
     // formData.append('img', img);
 
-    const { data } = await axios.put("https://objectstorage.kr-central-1.kakaoi.io/v1/eb454a58725f4cf4ba059729077e409b/bella-test/kube-image/test1.png",
+    const { data } = await axios.put("https://objectstorage.kr-central-1.kakaoi.io/v1/eb454a58725f4cf4ba059729077e409b/bella-test/kube-image-test",
     {
         headers:{
-            "X-Auth-Token":"gAAAAABj0Sop7rSDXM7UNo4mLHS7IrMBiWDzFJI9qVNkfMs7Avmftqe8n0NNXMjQXon789_KjxY3sB5K-aT6FqTepONdec06iveyFO3mggYZd30vQSqjeiLupMoy7N_HH7qpFoBXs8n86wTpCZSpPkBAUpd2PYehsfT8TLgcFM9goFqh6lH6fGoJvXCKIYOnxZcQ_rKe4Taw"
+            "X-Auth-Token":"gAAAAABj0yy6wH8jmVTXShLxW3-5FxTP0nnrcCjqBlwHyWs58VX3YDyMoPumVVLYML1tIJ6ELu4nnDkQrEd62KAV1K3SHUCakNpHRVd4ha6AUyt5wbD4bHH-Wbn6Rn-GBefDPP7XOKMABx_LEdYL_-F4WEJ756w8l30Elf_dJpFJut92z6hsYvn68ZAx7PxlVXXIaOH6WR_G",
+            'Content-Type': 'application/directory', 
+            'X-Object-Meta-Company': 'kakao enterprise'
         },
-    });
-    console.log(data);
+    })
+    console.log(data)
     return data;
 }

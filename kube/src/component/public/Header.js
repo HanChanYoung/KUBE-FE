@@ -39,7 +39,7 @@ export default function Header(){
                             justifyContent:"space-between",
                             alignItems:"center",
                     }}>
-                        <Button style={{color:"black",fontSize:"20px"}}>GUIDE</Button>
+                        <Button style={{color:"black",fontSize:"20px"}} onClick={()=>{navigate("/index")}}>GUIDE</Button>
                         <Button style={{color:"black",fontSize:"20px"}}>ABOUT</Button>                        
                         <div align="center" style={{width:"100px"}}>
                         {isLogin?

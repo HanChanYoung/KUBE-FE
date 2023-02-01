@@ -365,7 +365,7 @@ export default function BoardListPage () {
                     <div style={{width:"1500px",margin:"auto"}}>
                         <div style={{fontFamily:"sans-serif", textAlign:"center"}}>
                             <div style={{textAlign:"center"}}>
-                                {boardsData.map((v) => {
+                                {products.map((v) => {
                                     return (
                                         cate?cate===v.categoryName?
                                         <div key={v.boardId} style={{ maxWidth:"50%", display:"inline-block"}}>
