@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { GET_BOARD_LIST, IMAGE_DOWNLOAD,UPLOAD_IMAGE } from "../../config";
+import { GET_BOARD_LIST, IMAGE_DOWNLOAD,UPLOAD_IMAGE ,GET_BOARD_PAGE} from "../../config";
 import Header from "../public/Header";
 import { useState,} from "react";
 import { Buffer } from "buffer";
@@ -34,6 +34,13 @@ export default function IndexComponent(){
                 console.log("종료")
             }}
             >THSISTEST</Button>
+            <Button
+            onClick={async ()=>{
+                console.log("눌름");
+                console.log(GET_BOARD_PAGE(24));
+                console.log("종료")
+            }}
+            >THSISTEST24</Button>
         </div>
     )
 }

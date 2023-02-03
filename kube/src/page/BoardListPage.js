@@ -164,7 +164,7 @@ export default function BoardListPage () {
     const navigate = useNavigate();
 
     useEffect(async () => {
-        const { data } = await axios.get(`/api/posts`);
+        const { data } = await axios.get(`http://localhost:8081/api/posts`);
         setBoards(data);
     }, []);
     const pageNumbers = [];
@@ -327,6 +327,10 @@ export default function BoardListPage () {
                             <Button onClick={() => {
                                         setCate('Coppel / Ice box Tableware');
                                         setCurrentPage(1);
+                                        console.log(typeof(boardsData))
+                                        console.log(boardsData)
+                                        console.log(Array.isArray(boardsData))
+
                                     }}
                                     style={{color:"white",fontSize:"16px",
                                             width:"180px", height:"85px",
@@ -365,7 +369,7 @@ export default function BoardListPage () {
                     <div style={{width:"1500px",margin:"auto"}}>
                         <div style={{fontFamily:"sans-serif", textAlign:"center"}}>
                             <div style={{textAlign:"center"}}>
-                                {products.map((v) => {
+                                {boardsData && boardsData.map((v) => {
                                     return (
                                         cate?cate===v.categoryName?
                                         <div key={v.boardId} style={{ maxWidth:"50%", display:"inline-block"}}>
