@@ -6,7 +6,7 @@ export default function KaKaoLogin(){
         <Button onClick={()=>{
             console.log("Logined");
             Kakao.Auth.authorize({
-                redirectUri: 'http://210.109.63.24:96/login',
+                redirectUri: '/login',
                 scope: 'profile_nickname,profile_image,account_email',
             });
         }}> 

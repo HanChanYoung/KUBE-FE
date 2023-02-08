@@ -41,6 +41,13 @@ export default function IndexComponent(){
                 console.log("종료")
             }}
             >THSISTEST24</Button>
+            <Button
+            onClick={async ()=>{
+                console.log("눌름");
+                console.log(GET_BOARD_PAGE(24));
+                console.log("종료")
+            }}
+            >{process.env.REACT_APP_API_URL}</Button>
         </div>
     )
 }

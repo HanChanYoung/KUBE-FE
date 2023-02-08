@@ -164,7 +164,7 @@ export default function BoardListPage () {
     const navigate = useNavigate();
 
     useEffect(async () => {
-        const { data } = await axios.get(`http://localhost:8081/api/posts`);
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/posts`);
         setBoards(data);
     }, []);
     const pageNumbers = [];
