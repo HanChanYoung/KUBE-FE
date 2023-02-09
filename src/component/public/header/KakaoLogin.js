@@ -6,7 +6,7 @@ export default function KaKaoLogin(){
         <Button onClick={()=>{
             console.log("Logined");
             Kakao.Auth.authorize({
-                redirectUri: '/login',
+                redirectUri: 'https://camp.kube.p-e.kr/login',
                 scope: 'profile_nickname,profile_image,account_email',
             });
         }}> 
