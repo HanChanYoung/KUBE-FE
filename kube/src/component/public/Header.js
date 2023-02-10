@@ -40,7 +40,7 @@ export default function Header(){
                             alignItems:"center",
                     }}>
                         <Button style={{color:"black",fontSize:"20px"}} onClick={()=>{navigate("/index")}}>GUIDE</Button>
-                        <Button style={{color:"black",fontSize:"20px"}}>ABOUT</Button>                        
+                        <Button style={{color:"black",fontSize:"20px"}} onClick={()=>{navigate("/about")}}>ABOUT</Button>                        
                         <div align="center" style={{width:"100px"}}>
                         {isLogin?
                         <KakaoLogined/>

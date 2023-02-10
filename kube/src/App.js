@@ -12,6 +12,7 @@ import BoardListPage from './page/BoardListPage';
 import BoardRsvdPage from './page/BoardRsvdPage';
 import BoardCreatePage from './page/BoardCreatePage';
 import Index from './page';
+import LandingPage from './page/LandingPage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/brp/:boardId" element={<BoardRsvdPage/>}/>
         <Route path="bcp" element={<BoardCreatePage/>}/>
         <Route path="index" element={<Index/>}/>
+        <Route path="about" element={<LandingPage/>}/>
       </Routes>
     </Router>
   );

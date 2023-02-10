@@ -366,7 +366,7 @@ export default function BoardListPage () {
                     </div>
 
     {/* ---------- BoardList ---------- */}
-                    <div style={{width:"1500px",margin:"auto"}}>
+                    <div style={{width:"100%",margin:"auto"}}>
                         <div style={{fontFamily:"sans-serif", textAlign:"center"}}>
                             <div style={{textAlign:"center"}}>
                                 {boardsData && boardsData.map((v) => {
