@@ -20,7 +20,7 @@ export default function Login(){
         await axios.post("https://kauth.kakao.com/oauth/token",{
             "grant_type":"authorization_code",
             "client_id":"8932f7430024486005b0d58acf215574",
-            "redirect_uri":"/login",
+            "redirect_uri":"https://camp.kube.p-e.kr/login",
             "code":arr[1]
         },
         {
