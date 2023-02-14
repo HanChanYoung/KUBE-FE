@@ -54,7 +54,7 @@ export default function BoardRsvdPage(){
                 }
             });
         }else{
-            // console.log(boardId.boardId)
+            window.scrollTo(0,0);
         }
     })
     //날짜요
@@ -323,33 +323,86 @@ export default function BoardRsvdPage(){
                         fontSize:"16px"}}
                         onClick={()=>{
                             // console.log(data)
-                            CREATE_RSVD(
-                                {
-                                    "boardId":boardId.boardId,
-                                    "lenderId":`${uid}`,
-                                    "delvyOptionCode":`${take}${give}`,
-                                    "lenderAddr":`${zonecode} ${addr} ${extraAddr}`,
-                                    "rentStartDate":`${rendStartDate}`,
-                                    "rentEndDate":`${rendEndDate}`,
-                                    "rsvdId": 0,
-                                    "rsvdStatusCode": "예약중"
-                                }
-                            )
-                            Swal.fire({
-                                // toast: true,
-                                icon: 'success',
-                                title: '예약이 완료되었습니다!',
-                                animation: false,
-                                position: 'middle',
-                                showConfirmButton: false,
-                                timer: 1500,
-                                timerProgressBar: false,
-                                didOpen: (toast) => {
-                                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                }
-                            });
-                            navigate("/");
+                            if(rendStartDate==''||rendEndDate=='')
+                            {
+                                Swal.fire({
+                                    // toast: true,
+                                    icon: 'error',
+                                    title: '예약 날짜를 입력해주세요.',
+                                    animation: false,
+                                    position: 'middle',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                    timerProgressBar: false,
+                                    didOpen: (toast) => {
+                                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                });
+                            }else if(rendStartDate==rendEndDate)
+                            {
+                                Swal.fire({
+                                    // toast: true,
+                                    icon: 'error',
+                                    title: '예약 시작 날짜와 \n예약 종료 날짜는 \n동일할 수 없습니다.',
+                                    animation: false,
+                                    position: 'middle',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                    timerProgressBar: false,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                });
+                            }
+                            else if(!isCheck && (zonecode==''||addr==''))
+                            {
+                                Swal.fire({
+                                    // toast: true,
+                                    icon: 'error',
+                                    title: '주소를 입력해주세요.',
+                                    animation: false,
+                                    position: 'middle',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                    timerProgressBar: false,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                });
+                            }
+                            else{
+                                CREATE_RSVD(
+                                    {
+                                        "boardId":boardId.boardId,
+                                        "lenderId":`${uid}`,
+                                        "delvyOptionCode":`${take}${give}`,
+                                        "lenderAddr":`${zonecode} ${addr} ${extraAddr}`,
+                                        "rentStartDate":`${rendStartDate}`,
+                                        "rentEndDate":`${rendEndDate}`,
+                                        "rsvdId": 0,
+                                        "rsvdStatusCode": "예약중"
+                                    }
+                                )
+                                Swal.fire({
+                                    // toast: true,
+                                    icon: 'success',
+                                    title: '예약이 완료되었습니다!',
+                                    animation: false,
+                                    position: 'middle',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                    timerProgressBar: false,
+                                    didOpen: (toast) => {
+                                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                });
+                                navigate("/");
+                            }
+                            
                         }}
                         >예약하기</Button>
                     </div>

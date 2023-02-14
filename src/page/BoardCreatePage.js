@@ -85,7 +85,8 @@ export default function BoardCreatePage(){
     useEffect(() =>{
         if(!isLogin){
             navigate("/");
-    }}
+            }
+        }
     )
     //For menu
     const [anchorEl, setAnchorEl] = useState(null);
@@ -454,38 +455,109 @@ export default function BoardCreatePage(){
                                     url="/img/default/image-Coppel-1.png"
                                     break;
                             }
-
-                            CREATE_BOARD_PAGE({
-                                "boardId":0,
-                                "providerId":`${uid}`,
-                                "boardName":`${title}`,
-                                "boardDesc":`${desc}`,
-                                "categoryName":`${category}`,
-                                "price":parseInt(price),
-                                "delvyStatusCode":`${take}${give}`,
-                                "boardAddr":`${zonecode} ${addr} ${extraAddr}`,
-                                "rentStartDate":`${rendStartDate}`,
-                                "rentEndDate":`${rendEndDate}`,
-                                "imgSrc":url,
-                            })
-                            
-                            // UPLOAD_IMAGE(imageSrc)
-
-                            Swal.fire({
-                                // toast: true,
-                                icon: 'success',
-                                title: '보관 신청이 완료되었습니다!',
-                                animation: false,
-                                position: 'middle',
-                                showConfirmButton: false,
-                                timer: 1500,
-                                timerProgressBar: false,
-                                didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            if(title==''||desc==''||price==''||category=='카테고리를 선택해주세요.'||rendStartDate==''||rendEndDate=='')
+                            {
+                                var check=''
+                                switch(true){
+                                    case category=='카테고리를 선택해주세요.':
+                                        check='카테고리를 선택해주세요.'
+                                        break;
+                                    case title=='':
+                                        check='게시글 제목을 입력해주세요.'
+                                        break;
+                                    case price=='':
+                                        check='가격을 입력해주세요.'
+                                        break;
+                                    case desc=='':
+                                        check='게시글 설명을 입력해주세요.'
+                                        break;
+                                    case rendStartDate=='':
+                                        check='대여 가능 시작 날짜를 선택해주세요.'
+                                        break;
+                                    case rendEndDate=='':
+                                        check='대여 가능 종료 날짜를 선택해주세요.'
+                                        break;
                                 }
-                            });
-                            navigate("/");
+                                Swal.fire({
+                                    // toast: true,
+                                    icon: 'error',
+                                    title: `${check}`,
+                                    animation: false,
+                                    position: 'middle',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                    timerProgressBar: false,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                });
+                            }
+                            else if(!isCheck && (zonecode==''||addr==''))
+                            {
+                                Swal.fire({
+                                    // toast: true,
+                                    icon: 'error',
+                                    title: '주소를 입력해주세요.',
+                                    animation: false,
+                                    position: 'middle',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                    timerProgressBar: false,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                });
+                            }
+                            else if(rendStartDate==rendEndDate)
+                            {
+                                Swal.fire({
+                                    // toast: true,
+                                    icon: 'error',
+                                    title: '대여 시작 날짜와 \n대여 종료 날짜는 \n동일할 수 없습니다.',
+                                    animation: false,
+                                    position: 'middle',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                    timerProgressBar: false,
+                                    didOpen: (toast) => {
+                                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                });
+                            }else
+                            {
+                                CREATE_BOARD_PAGE({
+                                    "boardId":0,
+                                    "providerId":`${uid}`,
+                                    "boardName":`${title}`,
+                                    "boardDesc":`${desc}`,
+                                    "categoryName":`${category}`,
+                                    "price":parseInt(price),
+                                    "delvyStatusCode":`${take}${give}`,
+                                    "boardAddr":`${zonecode} ${addr} ${extraAddr}`,
+                                    "rentStartDate":`${rendStartDate}`,
+                                    "rentEndDate":`${rendEndDate}`,
+                                    "imgSrc":url,
+                                })                                
+                                Swal.fire({
+                                    // toast: true,
+                                    icon: 'success',
+                                    title: '보관 신청이 완료되었습니다!',
+                                    animation: false,
+                                    position: 'middle',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                    timerProgressBar: false,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                });
+                                navigate("/");
+                            }
+                            
                         }}
                         >보관신청하기</Button>
                     </div>
