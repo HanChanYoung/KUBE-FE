@@ -53,8 +53,6 @@ export default function BoardRsvdPage(){
                     toast.addEventListener('mouseleave', Swal.resumeTimer)
                 }
             });
-        }else{
-            window.scrollTo(0,0);
         }
     })
     //날짜요
