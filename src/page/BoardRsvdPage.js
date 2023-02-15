@@ -33,6 +33,7 @@ function toStringByFormatting(source, delimiter = '-') {
 export default function BoardRsvdPage(){
     
     const boardId=useParams();
+    const bgColor=useSelector((state)=>state.boardRsvdSlice.bgColor)
     const isLogin=useSelector((state)=>state.loginSlice.isLogin);
     const uid=useSelector((state)=>state.loginSlice.uid);
     // const rsvdPage=useSelector((state)=>state.boardRsvdSlice);
@@ -125,7 +126,7 @@ export default function BoardRsvdPage(){
                     }}>
                         <div style={{width:"650px",
                         height:"650px",
-                        backgroundColor:"#EEEEEE",
+                        backgroundColor:bgColor,
                         borderRadius:"20px",
                         display:"flex",
                         alignItems:"center",
@@ -170,10 +171,10 @@ export default function BoardRsvdPage(){
                         display:"flex",
                         alignItems:"center",}}>
                             <div>
-                            {data.data.boardDesc
-                            // .map((value)=>{
-                            //     return(<Typography style={{fontSize:"18px"}}>{value}</Typography>)
-                            // })
+                            {data.data.boardDesc.split('\n')
+                            .map((value)=>{
+                                return(<Typography>{value}</Typography>)
+                            })
                             }
                             </div>
                             
@@ -322,6 +323,7 @@ export default function BoardRsvdPage(){
                         borderRadius:"10px",
                         fontSize:"16px"}}
                         onClick={()=>{
+                            // console.log(data.data.boardDesc)
                             // console.log(data)
                             if(rendStartDate==''||rendEndDate=='')
                             {

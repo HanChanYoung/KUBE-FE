@@ -22,6 +22,7 @@ export const BoardRsvdSlice=createSlice(
             //대여자가 빌리는 기간
             rentStartDate:null,
             rentEndDate:null,
+            bgColor:null,
         },
         reducers:{
             SET_RSVD_PAGE:(state,action)=>{
@@ -41,6 +42,9 @@ export const BoardRsvdSlice=createSlice(
                 state.rentStartDate=action.payload['rentStartDate']
                 state.rentEndDate=action.payload['rentEndDate']
             },
+            SET_RSVD_BGCOLOR:(state,action)=>{
+                state.bgColor=action.payload;
+            }
         }
     }
 );
@@ -49,5 +53,6 @@ export const BoardRsvdSlice=createSlice(
 export const {
     SET_RSVD_PAGE,
     SET_RSVD_INFO,
+    SET_RSVD_BGCOLOR
 } = BoardRsvdSlice.actions;
 

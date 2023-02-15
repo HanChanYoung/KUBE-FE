@@ -1,5 +1,5 @@
 // import * as React from 'react';
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo , useRef} from "react";
 import Header from "../component/public/Header";
 import { Button, Modal, Box ,CircularProgress} from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -9,9 +9,18 @@ import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
 import { GET_BOARD_LIST } from "../config";
 import axios from 'axios'
+import {useDispatch} from 'react-redux';
+import { SET_RSVD_BGCOLOR } from "../state/slice/BoardRsvdSlice";
 
+function rand(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
 export default function BoardListPage () {
+
+    const dispatch=useDispatch();
+
+    const underRef=useRef();
 
     const [boards, setBoards] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
@@ -21,6 +30,7 @@ export default function BoardListPage () {
     const [totalBoards, setTotalBoards] = useState(0);
     const boardsPerPage = 8;
 
+    const bgColor=['#EEEEEE','#F9F5E8','#EBF1F9','#EBEBF5']
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -231,21 +241,24 @@ export default function BoardListPage () {
                     </div>
 
     {/* ---------- BoardList ---------- */}
-                    <div style={{width:"100%",margin:"auto"}}>
+                    <div style={{width:"1400px",margin:"auto"}}>
                         <div style={{fontFamily:"sans-serif", textAlign:"center"}}>
                             <div style={{textAlign:"center"}}>
                                 {boardsData && boardsData.map((v) => {
+                                    const choice=rand(0,3);
                                     return (
                                         cate?cate===v.categoryName?
                                         <div key={v.boardId} style={{ maxWidth:"50%", display:"inline-block"}}>
-                                            <div onClick={() => {navigate(`/brp/${v.boardId}`)}} 
+                                            <div onClick={() => {
+                                                dispatch(SET_RSVD_BGCOLOR(bgColor[choice]))
+                                                navigate(`/brp/${v.boardId}`)}} 
                                             style={{margin:"20px",
                                                         width:"300px", height:"300px",
                                                         overflow:"hidden",
                                                         borderRadius:"20px",
                                                         transition:"0.5s",
                                                         animation:"ease-in-out",
-                                                        backgroundColor:"#EEEEEE",
+                                                        backgroundColor:bgColor[choice],
                                                         textAlign:"center",
                                                         display:"table",}}>
                                             <div style={{overflow:"hidden",
@@ -291,14 +304,16 @@ export default function BoardListPage () {
                                         </div>:null
                                         :
                                         <div key={v.boardId} style={{ maxWidth:"50%", display:"inline-block"}}>
-                                            <div onClick={() => {navigate(`/brp/${v.boardId}`)}}
+                                            <div onClick={() => {
+                                                dispatch(SET_RSVD_BGCOLOR(bgColor[choice]))
+                                                navigate(`/brp/${v.boardId}`)}}
                                                 style={{margin:"20px",
                                                         width:"300px", height:"300px",
                                                         overflow:"hidden",
                                                         borderRadius:"20px",
                                                         transition:"0.5s",
                                                         animation:"ease-in-out",
-                                                        backgroundColor:"#EEEEEE",
+                                                        backgroundColor:bgColor[choice],
                                                         textAlign:"center",
                                                         display:"table",}}>
                                             <div style={{overflow:"hidden",
@@ -357,7 +372,11 @@ export default function BoardListPage () {
                                 }}>
                                     {pageNumbers.map((number) => (
                                         <li key={number}>
-                                        <Button onClick={() => paginate(number)}
+                                        <Button ref={underRef} onClick={() => {
+                                            underRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+                                            paginate(number)
+
+                                        }}
                                                 variant="outlined"
                                                 style={{
                                                     color:"black",
