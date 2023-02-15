@@ -8,7 +8,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../component/boardrsvdpage/calendar.css'
 import imageCompression from 'browser-image-compression';
-import { CREATE_BOARD_PAGE, IMAGE_DOWNLOAD, UPLOAD_IMAGE } from "../config";
+import { CREATE_BOARD_PAGE, UPLOAD_IMAGE } from "../config";
 import Swal from 'sweetalert2'
 
 function leftPad(value) {
@@ -50,6 +50,8 @@ export default function BoardCreatePage(){
 
     const [rendEndDate, setRendEndDate] = useState('')
 
+    const [imgSrc, setImgSrc] = useState('');
+
     const handleChange = (event) => {
         if(event.target.value=='직접'&&give=='직접'){
             setIsCheck(true);
@@ -83,9 +85,9 @@ export default function BoardCreatePage(){
     };
 
     useEffect(() =>{
-        // if(!isLogin){
-        //     navigate("/");
-        //     }
+        if(!isLogin){
+            navigate("/");
+            }
         }
     )
     //For menu
@@ -112,10 +114,10 @@ export default function BoardCreatePage(){
         // "/storeImage/userID+생성날짜(시간)"
             const compressedFile = await imageCompression(e.target.files[0], options);
             const reader = new FileReader();
-            reader.readAsBinaryString(compressedFile);
+            reader.readAsArrayBuffer(compressedFile);
             reader.onload=()=>{
-                console.log(reader.result)
-                UPLOAD_IMAGE(reader.result)
+                // console.log(reader.result)
+                setImgSrc(reader.result);
             }
 
             encodeFileToBase64(compressedFile);
@@ -535,6 +537,9 @@ export default function BoardCreatePage(){
                                 });
                             }else
                             {
+                                const date=new Date()
+                                const osURL="https://objectstorage.kr-central-1.kakaoi.io/v1/eb454a58725f4cf4ba059729077e409b/kube-camp-image/board-image/"
+                                const name=uid+date.getFullYear()+date.getDay()+date.getTime()+date.getMinutes();
                                 CREATE_BOARD_PAGE({
                                     "boardId":0,
                                     "providerId":`${uid}`,
@@ -546,8 +551,9 @@ export default function BoardCreatePage(){
                                     "boardAddr":`${zonecode} ${addr} ${extraAddr}`,
                                     "rentStartDate":`${rendStartDate}`,
                                     "rentEndDate":`${rendEndDate}`,
-                                    "imgSrc":url,
-                                })                                
+                                    "imgSrc":imgSrc?osURL+name:url,
+                                })                     
+                                UPLOAD_IMAGE(imgSrc,name);           
                                 Swal.fire({
                                     // toast: true,
                                     icon: 'success',

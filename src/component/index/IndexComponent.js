@@ -1,10 +1,8 @@
 import { Button } from "@mui/material";
-import { GET_BOARD_LIST, IMAGE_DOWNLOAD,UPLOAD_IMAGE ,GET_BOARD_PAGE} from "../../config";
 import Header from "../public/Header";
 import { useState,} from "react";
-import { Buffer } from "buffer";
-import Swal from 'sweetalert2'
 import axios from 'axios'
+import { GET_TOKEN } from "../../config";
 
 
 export default function IndexComponent(){
@@ -13,41 +11,12 @@ export default function IndexComponent(){
     return(
         <div style={{width:"100%"}}>
             <Header></Header>
-            <Button
-            onClick={async()=>{
-                const data= await IMAGE_DOWNLOAD();
-                const imgSrc=URL.createObjectURL(data)
-                console.log(imgSrc)
-                setImg(imgSrc);                
-            }}
-            >download</Button>
-            <img src={img} alt="img" />
+            <img src="https://objectstorage.kr-central-1.kakaoi.io/v1/eb454a58725f4cf4ba059729077e409b/kube-camp-image/board-image%2F1676436411865"></img>
             <Button
             onClick={()=>{
-                UPLOAD_IMAGE();
+                GET_TOKEN()
             }}
-            >upload</Button>
-            <Button
-            onClick={async ()=>{
-                console.log("눌름");
-                console.log(GET_BOARD_LIST());
-                console.log("종료")
-            }}
-            >THSISTEST</Button>
-            <Button
-            onClick={async ()=>{
-                console.log("눌름");
-                console.log(GET_BOARD_PAGE(24));
-                console.log("종료")
-            }}
-            >THSISTEST24</Button>
-            <Button
-            onClick={async ()=>{
-                console.log("눌름");
-                console.log(GET_BOARD_PAGE(24));
-                console.log("종료")
-            }}
-            >{process.env.REACT_APP_API_URL}</Button>
+            >토큰버튼</Button>
         </div>
     )
 }

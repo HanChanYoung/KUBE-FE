@@ -3,7 +3,7 @@ import axios from 'axios'
 const BASE_URL = 'http://localhost:8081';
 
 export const CREATE_BOARD_PAGE = async (req) => {
-    console.log(req)
+    // console.log(req)
     await axios.post(`${process.env.REACT_APP_API_URL}/api/posts`,req)
     .then((response) => {
     console.log(response);
@@ -60,14 +60,42 @@ export const IMAGE_DOWNLOAD = async (req) => {
     return(data);
 }
 const token="gAAAAABj7ECKfU8BBROya48Xm5aYtiExEWsJRBNiTBI3YwGvJcn0SEOa5soQGbjCBaMDmN6IuHB8ZuEvQ4Udl-FF3geMQ1-hSnw4j8nIV7S6Tq6nsfCfkSLw0Y_Jj7p2FH4CiXetqQOSM097GPE_8UKYL67Rvh1HLe2pgHbJzdvc1gAasrMEyUT6-bG8RcnqNos0jpm2I5u1"
-export const UPLOAD_IMAGE = async (img) => {
+export const UPLOAD_IMAGE = async (img,name) => {
+    // console.log(name)
+    // console.log(img)
 
-    const { data } = await axios.put("https://objectstorage.kr-central-1.kakaoi.io/v1/eb454a58725f4cf4ba059729077e409b/bella-test/kube-image/testesttest",{
-        headers:{
-            "X-Auth-Token":"gAAAAABj7ECKfU8BBROya48Xm5aYtiExEWsJRBNiTBI3YwGvJcn0SEOa5soQGbjCBaMDmN6IuHB8ZuEvQ4Udl-FF3geMQ1-hSnw4j8nIV7S6Tq6nsfCfkSLw0Y_Jj7p2FH4CiXetqQOSM097GPE_8UKYL67Rvh1HLe2pgHbJzdvc1gAasrMEyUT6-bG8RcnqNos0jpm2I5u1"
-        },
-    },
-    img)
+    // // 백엔드에서 토큰 받아옴
+    // const token=axios.post(`${process.env.REACT_APP_API_URL}/token`,req);
+
+    const { data }=axios.put(`https://objectstorage.kr-central-1.kakaoi.io/v1/eb454a58725f4cf4ba059729077e409b/kube-camp-image/board-image/${name}`,
+            img,
+        {
+        headers: {
+            'X-Auth-Token' : token,
+            'Content-Type': 'image/png'
+            }
+        }
+    )
     return data;
+}
+
+export const GET_TOKEN = async () => {
+    // // 백엔드에서 토큰 받아옴
+    const token=await axios.post(`${process.env.REACT_APP_API_URL}/token`, {
+        "auth": {
+            "identity": {
+                "methods": [
+                    "application_credential"
+                ],
+                "application_credential": {
+                    "id": "2aa5495907df4a708a95c2761782a420",
+                    "secret": "QUZ7_GFBXK7UCeyfG6j0UCUVJzLMIREYb8_9KizaVeizCmtwwR6yoBBJHDQPvK8Rl6DDVfR_2YnQO6UfHkobNg"
+                }
+            }
+        }
+    }
+    );
+    console.log(token)
+
 }
 
