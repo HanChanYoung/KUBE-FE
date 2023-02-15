@@ -66,7 +66,7 @@ export const UPLOAD_IMAGE = async (img,name) => {
 
     // // 백엔드에서 토큰 받아옴
     // const token=axios.post(`${process.env.REACT_APP_API_URL}/token`,req);
-    const token=GET_TOKEN()
+    const token=await GET_TOKEN()
 
     const { data }=await axios.put(`https://objectstorage.kr-central-1.kakaoi.io/v1/eb454a58725f4cf4ba059729077e409b/kube-camp-image/board-image/${name}`,
             img,
