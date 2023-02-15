@@ -539,7 +539,7 @@ export default function BoardCreatePage(){
                             {
                                 const date=new Date()
                                 const osURL="https://objectstorage.kr-central-1.kakaoi.io/v1/eb454a58725f4cf4ba059729077e409b/kube-camp-image/board-image/"
-                                const name=uid+date.getFullYear()+date.getDay()+date.getTime()+date.getMinutes();
+                                const name=`${uid}${date.getTime()}`;
                                 CREATE_BOARD_PAGE({
                                     "boardId":0,
                                     "providerId":`${uid}`,
