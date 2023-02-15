@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import Header from "../public/Header";
 import { useState,} from "react";
 import axios from 'axios'
-import { GET_TOKEN, GET_TOKEN_NO_PROXY } from "../../config";
+import { GET_TOKEN } from "../../config";
 
 
 export default function IndexComponent(){
@@ -17,11 +17,6 @@ export default function IndexComponent(){
                     GET_TOKEN()
                 }}
             >토큰버튼</Button>
-            <Button
-                onClick={()=>{
-                    GET_TOKEN_NO_PROXY()
-                }}
-            >프록시없이토큰버튼</Button>
         </div>
     )
 }
