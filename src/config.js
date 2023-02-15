@@ -59,19 +59,15 @@ export const IMAGE_DOWNLOAD = async (req) => {
     console.log(data)
     return(data);
 }
-
+const token="gAAAAABj7ECKfU8BBROya48Xm5aYtiExEWsJRBNiTBI3YwGvJcn0SEOa5soQGbjCBaMDmN6IuHB8ZuEvQ4Udl-FF3geMQ1-hSnw4j8nIV7S6Tq6nsfCfkSLw0Y_Jj7p2FH4CiXetqQOSM097GPE_8UKYL67Rvh1HLe2pgHbJzdvc1gAasrMEyUT6-bG8RcnqNos0jpm2I5u1"
 export const UPLOAD_IMAGE = async (img) => {
-    // const formData = new FormData();
-    // formData.append('img', img);
 
-    const { data } = await axios.put("https://objectstorage.kr-central-1.kakaoi.io/v1/eb454a58725f4cf4ba059729077e409b/bella-test/kube-image-test",
-    {
+    const { data } = await axios.put("https://objectstorage.kr-central-1.kakaoi.io/v1/eb454a58725f4cf4ba059729077e409b/bella-test/kube-image/testesttest",{
         headers:{
-            "X-Auth-Token":"gAAAAABj0yy6wH8jmVTXShLxW3-5FxTP0nnrcCjqBlwHyWs58VX3YDyMoPumVVLYML1tIJ6ELu4nnDkQrEd62KAV1K3SHUCakNpHRVd4ha6AUyt5wbD4bHH-Wbn6Rn-GBefDPP7XOKMABx_LEdYL_-F4WEJ756w8l30Elf_dJpFJut92z6hsYvn68ZAx7PxlVXXIaOH6WR_G",
-            'Content-Type': 'application/directory', 
-            'X-Object-Meta-Company': 'kakao enterprise'
+            "X-Auth-Token":"gAAAAABj7ECKfU8BBROya48Xm5aYtiExEWsJRBNiTBI3YwGvJcn0SEOa5soQGbjCBaMDmN6IuHB8ZuEvQ4Udl-FF3geMQ1-hSnw4j8nIV7S6Tq6nsfCfkSLw0Y_Jj7p2FH4CiXetqQOSM097GPE_8UKYL67Rvh1HLe2pgHbJzdvc1gAasrMEyUT6-bG8RcnqNos0jpm2I5u1"
         },
-    })
-    console.log(data)
+    },
+    img)
     return data;
 }
+

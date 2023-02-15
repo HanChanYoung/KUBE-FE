@@ -11,6 +11,8 @@ import { SET_RSVD_INFO,SET_RSVD_PAGE } from "../state/slice/BoardRsvdSlice";
 import { CREATE_RSVD, GET_BOARD_PAGE } from "../config";
 import { useQuery } from "react-query";
 import Swal from 'sweetalert2';
+import Error from "./Error";
+import Loading from "./Loading";
 
 function leftPad(value) {
     if (value >= 10) {
@@ -99,15 +101,15 @@ export default function BoardRsvdPage(){
     const {isLoading,data,isError,error} = useQuery("BoardPage",()=>GET_BOARD_PAGE(boardId.boardId));
 
     if(isLoading){
-        return <CircularProgress />
+        return <Loading/>
     }
     if(isError){
-        return  <h2>Oops... {error.message}</h2>
+        return  <Error/>
     }
     // // const disabledDates = [
     // //     // new Date('2023-01-26'),
     // // ];
-    console.log(data)
+    // console.log(data)
     return(
         <div>
             <Header/>

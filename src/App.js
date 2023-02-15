@@ -13,6 +13,7 @@ import BoardRsvdPage from './page/BoardRsvdPage';
 import BoardCreatePage from './page/BoardCreatePage';
 import Index from './page';
 import LandingPage from './page/LandingPage';
+import Error from './page/Error';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -38,6 +39,8 @@ function App() {
           <Route path="bcp" element={<BoardCreatePage/>}/>
           <Route path="index" element={<Index/>}/>
           <Route path="about" element={<LandingPage/>}/>
+          <Route path="error" element={<Error/>}/>
+          <Route path="/*" element={<Error/>}/>
         </Routes>
     </Router>
   );

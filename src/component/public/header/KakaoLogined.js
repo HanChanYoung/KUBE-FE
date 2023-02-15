@@ -95,7 +95,7 @@ export default function KakaoLogined(){
                     url: '/v1/user/unlink',
                     })
                     .then(function(response) {
-                        console.log(response);
+                        // console.log(response);
                         dispatch(SET_LOGOUT());
                     })
                     .catch(function(error) {

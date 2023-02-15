@@ -12,141 +12,6 @@ import axios from 'axios'
 
 
 export default function BoardListPage () {
-    const products = [
-        {   
-            id: 1,
-            category:"TENT / TARP",
-            desc: "원터치 텐트",
-            price: "27,000",
-            img: "/image-tent1.png"
-        },
-        {   
-            id: 2,
-            category:"PACKAGE",
-            desc: "풀세트",
-            price: "108,000",
-            img: "/image-PACKAGE1.png"
-        },
-        {   
-            id: 3,
-            category:"Bedding / Seasonal items",
-            desc: "Bedding / Seasonal items",
-            price: "10,000",
-            img: "/image-PACKAGE1.png"
-        },
-        {   
-            id: 4,
-            category:"PACKAGE",
-            desc: "풀세트",
-            price: "108,000",
-            img: "/image-PACKAGE1.png"
-        },
-        {   
-            id: 5,
-            category:"PACKAGE",
-            desc: "풀세트",
-            price: "108,000",
-            img: "/image-PACKAGE1.png"
-        },
-        {   
-            id: 6,
-            category:"PACKAGE",
-            desc: "풀세트",
-            price: "108,000",
-            img: "/image-PACKAGE1.png"
-        },
-        {   
-            id: 7,
-            category:"Chair / Table Furniture",
-            desc: "풀세트",
-            price: "108,000",
-            img: "/image-PACKAGE1.png"
-        },
-        {   
-            id: 8,
-            category:"PACKAGE",
-            desc: "풀세트",
-            price: "10,000",
-            img: "/image-tent1.png"
-        },
-        {   
-            id: 9,
-            category:"Brazier / Burner Others",
-            desc: "원터치 텐트",
-            price: "27,000",
-            img: "/image-tent1.png"
-        },
-        {   
-            id: 10,
-            category:"Tent",
-            desc: "원터치 텐트",
-            price: "27,000",
-            img: "/image-tent1.png"
-        },
-        {   
-            id: 11,
-            category:"PACKAGE",
-            desc: "풀세트",
-            price: "108,000",
-            img: "/image-PACKAGE1.png"
-        },
-        {   
-            id: 12,
-            category:"PACKAGE",
-            desc: "풀세트",
-            price: "108,000",
-            img: "/image-PACKAGE1.png"
-        },
-        {   
-            id: 13,
-            category:"Coppel / Ice box Tableware",
-            desc: "풀세트",
-            price: "108,000",
-            img: "/image-PACKAGE1.png"
-        },
-        {   
-            id: 14,
-            category:"PACKAGE",
-            desc: "풀세트",
-            price: "108,000",
-            img: "/image-PACKAGE1.png"
-        },
-        {   
-            id: 15,
-            category:"TENT / TARP",
-            desc: "원터치 텐트",
-            price: "27,000",
-            img: "/image-tent1.png"
-        },
-        {   
-            id: 16,
-            category:"PACKAGE",
-            desc: "풀세트",
-            price: "108,000",
-            img: "/image-PACKAGE1.png"
-        },
-        {   
-            id: 17,
-            category:"PACKAGE",
-            desc: "풀세트",
-            price: "108,000",
-            img: "/image-PACKAGE1.png"
-        },
-        {   
-            id: 18,
-            category:"PACKAGE",
-            desc: "풀세트",
-            price: "10,000",
-            img: "/image-tent1.png"
-        },
-        {   
-            id: 19,
-            category:"TENT / TARP",
-            desc: "원터치 텐트",
-            price: "27,000",
-            img: "/image-tent1.png"
-        },
-    ];
 
     const [boards, setBoards] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
@@ -164,15 +29,15 @@ export default function BoardListPage () {
     const navigate = useNavigate();
 
     useEffect(async () => {
-        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/posts`);
-        setBoards(data);
+        // const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/posts`);
+        // setBoards(data);
     }, []);
     const pageNumbers = [];
 
     for (let i = 1; i <= Math.ceil(totalBoards / boardsPerPage); i++) {
         pageNumbers.push(i);
     }
-
+    
     const boardsData = useMemo(() => {
         let computedBoard = boards;
 
@@ -327,9 +192,9 @@ export default function BoardListPage () {
                             <Button onClick={() => {
                                         setCate('Coppel / Ice box Tableware');
                                         setCurrentPage(1);
-                                        console.log(typeof(boardsData))
-                                        console.log(boardsData)
-                                        console.log(Array.isArray(boardsData))
+                                        // console.log(typeof(boardsData))
+                                        // console.log(boardsData)
+                                        // console.log(Array.isArray(boardsData))
 
                                     }}
                                     style={{color:"white",fontSize:"16px",

@@ -83,9 +83,9 @@ export default function BoardCreatePage(){
     };
 
     useEffect(() =>{
-        if(!isLogin){
-            navigate("/");
-            }
+        // if(!isLogin){
+        //     navigate("/");
+        //     }
         }
     )
     //For menu
@@ -108,9 +108,16 @@ export default function BoardCreatePage(){
         maxWidthOrHeight: 650
     }
     const handleChangeImage =async e => {
-        console.log(e.target.files[0]);
+        // console.log(e.target.files[0]);
         // "/storeImage/userID+생성날짜(시간)"
             const compressedFile = await imageCompression(e.target.files[0], options);
+            const reader = new FileReader();
+            reader.readAsBinaryString(compressedFile);
+            reader.onload=()=>{
+                console.log(reader.result)
+                UPLOAD_IMAGE(reader.result)
+            }
+
             encodeFileToBase64(compressedFile);
         }
 

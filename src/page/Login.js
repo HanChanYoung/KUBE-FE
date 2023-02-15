@@ -37,8 +37,8 @@ export default function Login(){
                 },
             })
                 .then(function(response) {
-                    console.log(response);
-                    console.log(response.id); 
+                    // console.log(response);
+                    // console.log(response.id); 
                     dispatch(SET_UID(response.id))
                     dispatch(SET_LOGIN());
 
