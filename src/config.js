@@ -6,7 +6,7 @@ export const CREATE_BOARD_PAGE = async (req) => {
     // console.log(req)
     await axios.post(`${process.env.REACT_APP_API_URL}/api/posts`,req)
     .then((response) => {
-    console.log(response);
+    // console.log(response);
     })
     .catch((error) => {
     console.log(error);
@@ -35,7 +35,7 @@ export const GET_BOARD_LIST = async () => {
 }
 
 export const CREATE_RSVD = async (req) => {
-    console.log(req)
+    // console.log(req)
     const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/api/reservation/`,req);
     return data;
 }
