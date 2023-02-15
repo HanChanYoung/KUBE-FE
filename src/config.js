@@ -59,15 +59,16 @@ export const IMAGE_DOWNLOAD = async (req) => {
     console.log(data)
     return(data);
 }
-const token="gAAAAABj7ECKfU8BBROya48Xm5aYtiExEWsJRBNiTBI3YwGvJcn0SEOa5soQGbjCBaMDmN6IuHB8ZuEvQ4Udl-FF3geMQ1-hSnw4j8nIV7S6Tq6nsfCfkSLw0Y_Jj7p2FH4CiXetqQOSM097GPE_8UKYL67Rvh1HLe2pgHbJzdvc1gAasrMEyUT6-bG8RcnqNos0jpm2I5u1"
+
 export const UPLOAD_IMAGE = async (img,name) => {
     // console.log(name)
     // console.log(img)
 
     // // 백엔드에서 토큰 받아옴
     // const token=axios.post(`${process.env.REACT_APP_API_URL}/token`,req);
+    const token=GET_TOKEN()
 
-    const { data }=axios.put(`https://objectstorage.kr-central-1.kakaoi.io/v1/eb454a58725f4cf4ba059729077e409b/kube-camp-image/board-image/${name}`,
+    const { data }=await axios.put(`https://objectstorage.kr-central-1.kakaoi.io/v1/eb454a58725f4cf4ba059729077e409b/kube-camp-image/board-image/${name}`,
             img,
         {
         headers: {
@@ -95,8 +96,9 @@ export const GET_TOKEN = async () => {
         }
     }
     );
-    console.log(token)
-    console.log(token.headers["x-subject-token"])
+    // console.log(token)
+    // console.log(token.headers["x-subject-token"])
+    return token.headers["x-subject-token"];
 }
 
 
