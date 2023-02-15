@@ -96,6 +96,27 @@ export const GET_TOKEN = async () => {
     }
     );
     console.log(token)
-
+    console.log(token.headers.x-subject-token)
 }
+
+export const GET_TOKEN_NO_PROXY = async () => {
+    // // 백엔드에서 토큰 받아옴
+    const token=await axios.post(`https://iam.kakaoi.io/identity/v3/auth/tokens`, {
+        "auth": {
+            "identity": {
+                "methods": [
+                    "application_credential"
+                ],
+                "application_credential": {
+                    "id": "2aa5495907df4a708a95c2761782a420",
+                    "secret": "QUZ7_GFBXK7UCeyfG6j0UCUVJzLMIREYb8_9KizaVeizCmtwwR6yoBBJHDQPvK8Rl6DDVfR_2YnQO6UfHkobNg"
+                }
+            }
+        }
+    }
+    );
+    console.log(token)
+    console.log(token.headers.x-subject-token)
+}
+
 
