@@ -373,12 +373,13 @@ export default function BoardListPage () {
                                     {pageNumbers.map((number) => (
                                         <li key={number}>
                                         <Button ref={underRef} onClick={() => {
-                                            underRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+                                            
                                             paginate(number)
-
+                                            underRef.current.scrollIntoView();
                                         }}
                                                 variant="outlined"
                                                 style={{
+                                                    backgroundColor:currentPage==number?"gray":"white",
                                                     color:"black",
                                                     borderColor:"gray",
                                                     width:"30px",
