@@ -140,7 +140,7 @@ export default function BoardListPage () {
             <Header />
             <div>
                 <div>
-                    <div style={{height:"400px",
+                    <div style={{height:"300px",
                                 overflow:"hidden"}}>
                         <ImageSlider />
                     </div>
@@ -379,7 +379,7 @@ export default function BoardListPage () {
                                         }}
                                                 variant="outlined"
                                                 style={{
-                                                    backgroundColor:currentPage==number?"gray":"white",
+                                                    backgroundColor:currentPage==number?"#EEEEEE":"white",
                                                     color:"black",
                                                     borderColor:"gray",
                                                     width:"30px",
